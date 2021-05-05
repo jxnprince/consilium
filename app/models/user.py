@@ -12,6 +12,8 @@ class User(db.Model, UserMixin):
     hashedPassword = db.Column(db.String(255), nullable=False)
     superUser = db.Column(db.Boolean, default=False, nullable=False)
 
+    projects = db.relationship("Project", back_ref="user")
+
     @property
     def password(self):
         return self.hashedPassword
@@ -30,3 +32,22 @@ class User(db.Model, UserMixin):
             "lastName": self.lastName,
             "superUser": self.superUser
         }
+
+    def artists(self):
+        '''
+        Get all artists associated with the engineer
+        '''
+        if self.superUser == False:
+            return []
+        projects = self.projects_engineer
+        artists = []
+        [artists.extend(p.artist) for p in projects]
+        return artists
+
+    def engineers(self):
+        '''
+        Get an engineer associated with a project
+        '''
+        projects = self.projects_artist
+        engineer = [p.engineer for p in projects]
+        return engineer
