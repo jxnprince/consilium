@@ -10,7 +10,7 @@ class User(db.Model, UserMixin):
     lastName = db.Column(db.String(40), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashedPassword = db.Column(db.String(255), nullable=False)
-    superUser = db.Column(db.Boolean, default=False, nullable=false)
+    superUser = db.Column(db.Boolean, default=False, nullable=False)
 
     @property
     def password(self):

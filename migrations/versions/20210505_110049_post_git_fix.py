@@ -1,8 +1,8 @@
-"""first User iteration
+"""POST git fix
 
-Revision ID: fd43e4f9cb03
+Revision ID: 66478fbf4a7a
 Revises: 
-Create Date: 2021-05-04 16:21:07.106329
+Create Date: 2021-05-05 11:00:49.347030
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'fd43e4f9cb03'
+revision = '66478fbf4a7a'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -24,7 +24,9 @@ def upgrade():
     sa.Column('lastName', sa.String(length=40), nullable=False),
     sa.Column('email', sa.String(length=255), nullable=False),
     sa.Column('hashedPassword', sa.String(length=255), nullable=False),
+    sa.Column('superUser', sa.Boolean(), nullable=False),
     sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('email'),
     sa.UniqueConstraint('email')
     )
     # ### end Alembic commands ###
