@@ -5,6 +5,7 @@ from flask_login import UserMixin
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
+
     id = db.Column(db.Integer, primary_key=True)
     firstName = db.Column(db.String(40), nullable=False)
     lastName = db.Column(db.String(40), nullable=False)
@@ -12,7 +13,8 @@ class User(db.Model, UserMixin):
     hashedPassword = db.Column(db.String(255), nullable=False)
     superUser = db.Column(db.Boolean, default=False, nullable=False)
 
-    projects = db.relationship("Project", back_ref="user")
+    projects = db.relationship("Project", back_populates="user")
+    comments = db.relationship("Comment", back_populates="user")
 
     @property
     def password(self):
