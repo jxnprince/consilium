@@ -4,7 +4,7 @@ import session from './session'
 
 
 const rootReducer = combineReducers({
-    session
+    session: session
 });
 
 let enhancer;

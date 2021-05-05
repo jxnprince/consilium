@@ -22,30 +22,25 @@ function App() {
     })();
   }, [dispatch]);
 
-  if (!loaded) {
-    return null;
-  }
+  if (!loaded) return null;
 
   return (
     <BrowserRouter>
       <NavBar />
       <Switch>
-        <Route path="/login" exact={true}>
-          <LoginForm />
+        {/* <Route path="/login" exact={true}>
         </Route>
         <Route path="/sign-up" exact={true}>
-          <SignUpForm />
-        </Route>
-        <ProtectedRoute path="/users" exact={true} >
-          <UsersList/>
-        </ProtectedRoute>
-        <ProtectedRoute path="/users/:userId" exact={true} >
-          <User />
-        </ProtectedRoute>
+        </Route> */}
         <ProtectedRoute path="/" exact={true}>
-          <h1>My Home Page</h1>
+          <h1>Consilium Home Page</h1>
+            <LoginForm />
+            <SignUpForm />
         </ProtectedRoute>
       </Switch>
+        <Route>
+          <h1>Looks like this page doesn't exist...</h1>
+        </Route>
     </BrowserRouter>
   );
 }

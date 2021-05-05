@@ -55,6 +55,7 @@ export const logout = () => async (dispatch) => {
         }
     });
     const data = await response.json();
+    console.log(data)
     dispatch(removeUser());
 };
 
