@@ -7,22 +7,28 @@ const SignUpForm = () => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
   const sessionLoaded = useSelector(state => state.session.loaded);
-  const [username, setUsername] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const [superUser, setSuperUser] = useState("");
 
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      dispatch(signUp(username, email, password))
+      dispatch(signUp(firstName, lastName, email, password))
         .catch(err => setErrors(err.errors));
   };
 }
 
-  const updateUsername = (e) => {
-    setUsername(e.target.value);
+  const updateFirstName = (e) => {
+    setFirstName(e.target.value);
+  };
+
+  const updateLastName = (e) => {
+    setLastName(e.target.value);
   };
 
   const updateEmail = (e) => {
@@ -37,6 +43,10 @@ const SignUpForm = () => {
     setRepeatPassword(e.target.value);
   };
 
+  const updateSuperUser = (e) => {
+    setSuperUser(e.target.value);
+  };
+
   if (sessionLoaded && user) {
     return <Redirect to="/" />;
   }
@@ -44,12 +54,21 @@ const SignUpForm = () => {
   return (
     <form onSubmit={onSignUp}>
       <div>
-        <label>User Name</label>
+        <label>First Name</label>
         <input
           type="text"
-          name="username"
-          onChange={updateUsername}
-          value={username}
+          name="firstName"
+          onChange={updateFirstName}
+          value={firstName}
+        ></input>
+      </div>
+      <div>
+        <label>Last Name</label>
+        <input
+          type="text"
+          name="Last Name"
+          onChange={updateLastName}
+          value={lastName}
         ></input>
       </div>
       <div>
@@ -80,7 +99,16 @@ const SignUpForm = () => {
           required={true}
         ></input>
       </div>
-      <button type="submit">Sign Up</button>
+      <div>
+        <label>Engineer</label>
+        <input
+          type="checkbox"
+          name="superUser"
+          onChange={updateSuperUser}
+          value={superUser}
+        ></input>
+      </div>
+      <button type="submit">Join</button>
     </form>
   );
 };
