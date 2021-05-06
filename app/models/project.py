@@ -18,7 +18,6 @@ class Project(db.Model):
             "id": self.id,
             "name": self.name,
             "engineerId": self.engineerId,
-            "engineer": self.engineer,
             "artistId": self.artistId,
-            "artist": self.artist
+            "tracks": self.tracks
         }

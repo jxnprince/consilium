@@ -37,18 +37,18 @@ class User(db.Model, UserMixin):
             "superUser": self.superUser
         }
 
-    def __Artists(self):
+    def getArtists(self):
         '''
         Get all artists associated with the engineer
         '''
         if not self.superUser:
             return []
-        projects = self.projects_engineer
+        projects = self.artist
         artists = []
         [artists.extend(p.artist) for p in projects]
-        return artists
+        return projects
 
-    def __Engineers(self):
+    def getEngineers(self):
         '''
         Get an engineer associated with a project
         '''
