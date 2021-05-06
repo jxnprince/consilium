@@ -12,13 +12,13 @@ export const hideModal = () => ({
 } )
 
 export const setCurrentModal = current => ({
-    type: current,
-    payload: current
+    type: CURRENT,
+    current
 } )
 
 export const setModalMount = mount => ({
     type: MOUNT,
-    payload: mount
+    mount
 } )
 
 export default function reducer (state = {
@@ -33,9 +33,9 @@ export default function reducer (state = {
         case HIDE:
             return {...state, display:false}
         case CURRENT:
-            return {...state, current:action.current}
+            return {...state, current: action.current}
         case MOUNT:
-            return {...state, mount:action.mount}
+            return {...state, mount: action.mount}
         default:
             return state
     }

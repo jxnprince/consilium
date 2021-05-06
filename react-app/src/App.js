@@ -17,7 +17,7 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar />
-      {/* <Modal /> */}
+      <Modal />
       <Switch>
         <Route path="/" exact={true}>
           <h1>Consilium Home Page</h1>

@@ -14,9 +14,9 @@ export default function Modal () {
     const onClose = () =>{
         dispatch(hideModal())
     }
-
+// debugger
     return mount && display && ReactDOM.createPortal(
-    <div onclick={onClose} className='modal-background'>
+    <div onClick={onClose} className='modal-background'>
         <div onClick={e => e.stopPropagation()} className='modal-content'>
             <Current />
         </div>
