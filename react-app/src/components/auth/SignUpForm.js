@@ -6,7 +6,9 @@ import { signUp } from '../../store/session';
 const SignUpForm = () => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
+  const sessionLoaded = useSelector(state => state.session.loaded);
   const [username, setUsername] = useState("");
+  const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
@@ -14,9 +16,10 @@ const SignUpForm = () => {
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      await dispatch(signUp(username, email, password));
-    }
+      dispatch(signUp(username, email, password))
+        .catch(err => setErrors(err.errors));
   };
+}
 
   const updateUsername = (e) => {
     setUsername(e.target.value);
@@ -34,7 +37,7 @@ const SignUpForm = () => {
     setRepeatPassword(e.target.value);
   };
 
-  if (user) {
+  if (sessionLoaded && user) {
     return <Redirect to="/" />;
   }
 
