@@ -50,7 +50,7 @@ This is the backend for the Flask React project.
 	```
 
 *ALSO IMPORTANT!*
-	psycopg2-binary MUST remain a dev dependency because you can't install it on apline-linux.
+	psycopg2-binary MUST remain a dev dependency because you can't install it on alpine-linux.
 	There is a layer in the Dockerfile that will install psycopg2 (not binary) for us.
 ***
 
@@ -77,20 +77,20 @@ This is the backend for the Flask React project.
 	This will build the dockerfile and push the image to your heroku container registry
 
 	```bash
-	heroku container:push web -a {NAME_OF_HEROKU_APP}
+	heroku container:push web -a consiliumm
 	```
 
 8. Release your docker container to heroku
 
 	```bash
-	heroku container:release web -a {NAME_OF_HEROKU_APP}
+	heroku container:release web -a consiliumm
 	```
 
 9. set up your database:
 
 	```bash
-	heroku run -a {NAME_OF_HEROKU_APP} flask db upgrade
-	heroku run -a {NAME_OF_HEROKU_APP} flask seed all
+	heroku run -a consiliumm flask db upgrade
+	heroku run -a consiliumm flask seed all
 	```
 
 10. Under Settings find "Config Vars" and add any additional/secret .env variables.
