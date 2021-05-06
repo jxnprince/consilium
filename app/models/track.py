@@ -15,6 +15,5 @@ class Track(db.Model):
         return {
             "id": self.id,
             "name": self.name,
-            "projectId": self.projectId,
-            "project": self.project
+            "projectId": self.projectId
         }
