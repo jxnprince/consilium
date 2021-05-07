@@ -36,19 +36,13 @@ def seed_tracks():
             Track(name='Tone is Set', projectId=4),
             Track(name='The Night Resumes', projectId=5),
             Track(name='A la Glory', projectId=6)
-
             ]
 
     for track in data:
         db.session.add(track)
-
     db.session.commit()
 
 
-# Uses a raw SQL query to TRUNCATE the users table.
-# SQLAlchemy doesn't have a built in function to do this
-# TRUNCATE Removes all the data from the table, and resets
-# the auto incrementing primary key
 def undo_tracks():
     db.session.execute('TRUNCATE tracks RESTART IDENTITY CASCADE;')
     db.session.commit()

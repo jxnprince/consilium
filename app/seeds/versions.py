@@ -2,9 +2,8 @@ from app.models import db, Version
 
 
 def seed_versions():
-
     data = [
-            Version(url='',length='',trackId=''),
+            Version(url='https://consilium.s3-us-west-2.amazonaws.com/06+Latenight+Moonlight.mp3', length=3, trackId=1),  # noqa
             ]
 
     for versions in data:
@@ -13,10 +12,6 @@ def seed_versions():
     db.session.commit()
 
 
-# Uses a raw SQL query to TRUNCATE the users table.
-# SQLAlchemy doesn't have a built in function to do this
-# TRUNCATE Removes all the data from the table, and resets
-# the auto incrementing primary key
 def undo_versions():
     db.session.execute('TRUNCATE versions RESTART IDENTITY CASCADE;')
     db.session.commit()
