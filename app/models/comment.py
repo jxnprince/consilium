@@ -2,11 +2,11 @@ from .db import db
 
 
 class Comment(db.Model):
-    __tablename__='comments'
+    __tablename__ = 'comments'
 
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String(255), nullable=False)
-    versionId = db.Column(db.Integer, db.ForeignKey("versions.id"), nullable=False)
+    versionId = db.Column(db.Integer, db.ForeignKey("versions.id"), nullable=False)  # noqa
     userId = db.Column(db.Integer, db.ForeignKey("users.id"))
 
     user = db.relationship("User", back_populates="comments")
@@ -17,7 +17,5 @@ class Comment(db.Model):
             "id": self.id,
             "body": self.body,
             "versionId": self.versionId,
-            "userId": self.userId,
-            "user": self.user,
-            "version": self.version
+            "userId": self.userId
         }
