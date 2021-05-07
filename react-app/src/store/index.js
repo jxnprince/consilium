@@ -2,14 +2,14 @@ import {createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from 'redux-thunk';
 import session from './session'
 import modal from './modal'
-import versionReducer from './version'
+import uploadReducer from './uploads'
 
 
 //keys in root reducer are state.session / state.bananaCreamPie
 const rootReducer = combineReducers({
-    session: session,
-    modal: modal,
-    versionReducer:versionReducer
+    session,
+    modal,
+    uploadReducer
 });
 
 let enhancer;

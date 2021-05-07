@@ -1,39 +1,39 @@
 const UPLOAD_FILE = "versions/UPLOAD_FILE";
-const RENDER_MUSIC = "versions/RENDER_MUSIC";
+const RENDER_FILE = "versions/RENDER_FILE";
 
-const uploadVersion = (file) => ({
+const uploadFile = (url) => ({
     type: UPLOAD_FILE,
-    file
-})
-
-const renderVersion = (url) => ({
-    type: RENDER_MUSIC,
     url
 })
 
+// const renderVersion = (url) => ({
+//     type: RENDER_FILE,
+//     url
+// })
 
-export const fileUpload = (submission) => async (dispatch) => {
-    const { url } = submission
+
+export const fileUpload = (file) => async (dispatch) => {
     const formData = new FormData()
-    formData.append("url", url) 
-
-    const response = await fetch('/api/files/', {
+    formData.append("file", file)
+    const response = await fetch(`/api/files/`, {
+        // headers: { "content-type": 'multipart/form-data' },
         method: "POST",
-        body: formData
+        body: formData,
     });
-
     if (response.ok) {
-        const data = await response.json();
-        dispatch(uploadVersion(data))
+        const url = await response.json();
+        console.log(url)
+        dispatch(uploadFile(url))
         return 
+    }else{
+        return {"Errors": "Could not contact server"}
     }
-
 }
 
-export default function versionReducer(state = { post: null, posts: null }, action) {
+export default function uploadReducer(state = { url: null }, action) {
     switch (action.type) {
         case UPLOAD_FILE:
-            return { ...state, post: action.payload };
+            return { ...state, url: action.url };
         default:
             return state
     }

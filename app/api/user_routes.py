@@ -143,8 +143,8 @@ def upload_file():
 def uploadTrackVersion(artistId, projectId, trackId):
     '''
     Posts a new mix version to AWS []
-    Updates on database [X]
-    Updates on AWS []
+    Updates on database []
+    Updates on AWS [X]
     '''
     user = current_user
     artist = User.query.get(artistId)
