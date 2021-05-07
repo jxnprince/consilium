@@ -18,6 +18,7 @@ def seed():
     # seed_versions()
     # seed_comments()
 
+
 # Creates the `flask seed undo` command
 @seed_commands.command('undo')
 def undo():

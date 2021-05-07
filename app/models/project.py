@@ -11,7 +11,7 @@ class Project(db.Model):
 
     # engineer = db.relationship("User", foreign_keys='Project.engineerId', back_populates="projects_engineer", uselist=False)  # noqa
     # artist = db.relationship("User", foreign_keys='Project.artistId', back_populates="projects_artist")  # noqa
-    tracks = db.relationship("Track", back_populates="project")
+    tracks = db.relationship("Track", back_populates="project", cascade="all, delete-orphan")  # noqa
 
     def to_dict(self):
         return {

@@ -9,7 +9,7 @@ class Track(db.Model):
     projectId = db.Column(db.Integer, db.ForeignKey("projects.id"), nullable=False)  # noqa
 
     project = db.relationship("Project", back_populates="tracks")
-    versions = db.relationship("Version", back_populates="track")
+    versions = db.relationship("Version", back_populates="track", cascade="all, delete-orphan")  # noqa
 
     def to_dict(self):
         return {

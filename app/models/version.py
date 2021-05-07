@@ -10,7 +10,7 @@ class Version(db.Model):
     trackId = db.Column(db.Integer, db.ForeignKey("tracks.id"), nullable=False)
 
     track = db.relationship("Track", back_populates="versions")
-    comments = db.relationship("Comment", back_populates="version")
+    comments = db.relationship("Comment", back_populates="version", cascade="all, delete-orphan")  # noqa
 
     def to_dict(self):
         return{
