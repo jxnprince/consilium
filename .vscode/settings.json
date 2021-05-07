@@ -6,5 +6,17 @@
         "agsdfbakhjabfd",
         "asdg"
     ],
-    "python.formatting.provider": "black"
+    "python.formatting.provider": "black",
+        "[python]": {
+            "editor.tabSize": 4
+        },
+        "[html]": {
+            "editor.tabSize": 4
+        },
+        "[javascript]": {
+            "editor.tabSize": 2
+        },
+        "[css]": {
+            "editor.tabSize": 2
+        }
 }

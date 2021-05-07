@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import  { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { login } from "../../store/session";
+import { hideModal } from '../../store/modal'
+
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -15,6 +17,7 @@ const LoginForm = () => {
     e.preventDefault();
     dispatch(login(email, password))
       .catch(err => setErrors(err.errors));
+    dispatch(hideModal())
   };
 
   const updateEmail = (e) => {
@@ -26,7 +29,7 @@ const LoginForm = () => {
   };
 
   if (sessionLoaded && user) {
-    return <Redirect to="/" />;
+    return <Redirect to={`/users/${user.id}`} />;
   }
 
   return (
