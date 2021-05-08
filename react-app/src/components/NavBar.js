@@ -29,51 +29,33 @@ const NavBar = () => {
 	if (!user){
 	return (
 		<nav>
-			<ul>
-				<li>
-					<button onClick={showLogin}> 
-						Log In
-					</button>
-				</li>
-				<li>
-					<button onClick={showSignup}> 
-						sign up
-					</button>
-				</li>
-				<li>
-					<button onClick={guestLoginHandler}> 
-						Take a tour
-					</button>
-				</li>
-			</ul>
+			<button onClick={showLogin}> 
+				Log In
+			</button>
+			
+			<button onClick={showSignup}> 
+				sign up
+			</button>
+			
+			<button onClick={guestLoginHandler}> 
+				Take a tour
+			</button>
 		</nav>
 	)} else if (user && user.superUser){
 	return (
 		<nav>
-			<ul>
-				<li>
-					<NavLink to="/" exact={true} activeClassName="active">
-						Home
-					</NavLink>
-				</li>
-				<li>
-					<LogoutButton />
-				</li>
-			</ul>
+			<NavLink to="/" exact={true} activeClassName="active">
+				Home
+			</NavLink>
+			<LogoutButton />
 		</nav>
 	)} else{
 	return (
 		<nav>
-			<ul>
-				<li>
-					<NavLink to="/" exact={true} activeClassName="active">
-						Home
-					</NavLink>
-				</li>
-				<li>
-					<LogoutButton />
-				</li>
-			</ul>
+			<NavLink to="/" exact={true} activeClassName="active">
+				Home
+			</NavLink>
+			<LogoutButton />
 		</nav>
 	)}
 }
