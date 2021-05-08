@@ -2,12 +2,20 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux'
 import LogoutButton from './auth/LogoutButton';
-import {showModal, hideModal, setCurrentModal} from '../store/modal'
+import {showModal, setCurrentModal} from '../store/modal'
 import loginForm from '../components/auth/LoginForm'
 import SignUpForm from '../components/auth/SignUpForm'
 import { login } from '../store/session';
+import { withStyles } from '@material-ui/core'
+import SessionSwitch from './auth/sessionSwitch'
 
-const NavBar = () => {
+const styles = {
+	flex: {
+		flex: 1
+	}
+}
+
+const NavBar = withStyles(styles)(({classes}) => {
 	const dispatch = useDispatch()
 
 	const showLogin = () =>{
@@ -28,11 +36,8 @@ const NavBar = () => {
 
 	if (!user){
 	return (
-		<nav>
-			<button onClick={showLogin}> 
-				Log In
-			</button>
-			
+		<nav className={classes.flex}>
+		<SessionSwitch defaultChecked={false}/>
 			<button onClick={showSignup}> 
 				sign up
 			</button>
@@ -43,21 +48,20 @@ const NavBar = () => {
 		</nav>
 	)} else if (user && user.superUser){
 	return (
-		<nav>
+		<nav className={classes.flex}>
+			<SessionSwitch defaultChecked={true}/>
 			<NavLink to="/" exact={true} activeClassName="active">
 				Home
 			</NavLink>
-			<LogoutButton />
 		</nav>
 	)} else{
 	return (
-		<nav>
+		<nav className={classes.flex}>
 			<NavLink to="/" exact={true} activeClassName="active">
 				Home
 			</NavLink>
-			<LogoutButton />
 		</nav>
 	)}
-}
+})
 
 export default NavBar;

@@ -9,7 +9,7 @@ const LogoutButton = () => {
     dispatch(logout())
   }
 
-  return <Button onClick={onLogout}>Logout</Button>;
+  return <Button variant='contained' color='primary' onClick={onLogout}>Logout</Button>;
 };
 
 export default LogoutButton;
