@@ -126,41 +126,41 @@ def uploadTrackVersion(artistId, projectId, trackId):
     artist = User.query.get(artistId)
     project = Project.query.get(projectId)
     track = Track.query.get(trackId)
-    # if user.superUser:
-    #     if track:
-    #         if track.projectId == project.id:
-    #             if project.artistId == artist.id:
-    #                 if project.engineerId == user.id:
-    #                     if "file" not in request.files:
-    #                         return {"errors": "file required"}, 400
-    file = request.files["file"]
+    if user.superUser:
+        if track:
+            if track.projectId == project.id:
+                if project.artistId == artist.id:
+                    if project.engineerId == user.id:
+                        if "file" not in request.files:
+                            return {"errors": "file required"}, 400
+                        file = request.files["file"]
 
-    if not allowed_file(file.filename):
-        return {"errors": "file type not permitted"}, 400
+                        if not allowed_file(file.filename):
+                            return {"errors": "file type not permitted"}, 400
 
-    file.filename = get_unique_filename(file.filename)
-    upload = upload_file_to_s3(file)
-    if "url" not in upload:
-        return upload, 400
-    url = upload["url"]
-    data = Version(
-        url=upload["url"],
-        length=3,
-        trackId=track.id
-    )
-    db.session.add(data)
-    db.session.commit()
-    return data.to_dict()
-    #                 else:
-    #                     return {"Errors": f"{user.firstName} {user.lastName} cannot delete '{project.name}' because they are not on the project"}  # noqa
-    #             else:
-    #                 return {"Errors": f"'{project.name}' does not belong to {artist.firstName} {artist.lastName}"}  # noqa
-    #         else:
-    #             return {"Errors": f"'{track.name}' does not belong to {project.name}"}  # noqa
-    #     else:
-    #         return {"Errors": f"Track does not exist!"}
-    # else:
-    #     return {"Errors": f"{user.firstName} {user.lastName} is not authorized to perform this action."}  # noqa
+                        file.filename = get_unique_filename(file.filename)
+                        upload = upload_file_to_s3(file)
+                        if "url" not in upload:
+                            return upload, 400
+                        url = upload["url"]
+                        data = Version(
+                            url=upload["url"],
+                            length=3,
+                            trackId=track.id
+                        )
+                        db.session.add(data)
+                        db.session.commit()
+                        return data.to_dict()
+                    else:
+                        return {"Errors": f"{user.firstName} {user.lastName} cannot delete '{project.name}' because they are not on the project"}  # noqa
+                else:
+                    return {"Errors": f"'{project.name}' does not belong to {artist.firstName} {artist.lastName}"}  # noqa
+            else:
+                return {"Errors": f"'{track.name}' does not belong to {project.name}"}  # noqa
+        else:
+            return {"Errors": f"Track does not exist!"}
+    else:
+        return {"Errors": f"{user.firstName} {user.lastName} is not authorized to perform this action."}  # noqa
 
 
 @user_routes.route('/<int:artistId>/projects/<int:projectId>/delete', methods=['DELETE'])  # noqa
