@@ -15,7 +15,6 @@ const UploadFile = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setFileLoading(true)
-		
 		const createdFile = dispatch(fileUpload(file))
 			setFileLoading(false);
 			// if (createdFile) setFileCreated(true)

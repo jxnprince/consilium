@@ -7,9 +7,7 @@ file_routes = Blueprint("files", __name__)
 
 
 @file_routes.route("/", strict_slashes=False, methods=["POST"])
-# @login_required
 def upload_file():
-    # print(request.data, '================================================================')  # noqa
     if "file" not in request.files:
         return {"errors": "file required"}, 400
     file = request.files["file"]
