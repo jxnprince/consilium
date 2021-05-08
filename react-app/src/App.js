@@ -21,19 +21,18 @@ function App() {
       <Modal />
       <Switch>
         <Route path="/" exact={true}>
-          <UploadFile />
         </Route>
-        <ProtectedRoute path="/users/:id/" exact={true}>
+        <ProtectedRoute path="/users/:artistId" exact={true}>
           <h1>A projects belonging to a single artist</h1>
         </ProtectedRoute>
-        <ProtectedRoute path="/users/:id/artists/" exact={true}>
+        <ProtectedRoute path="/users/:artistId/artists" exact={true}>
           <h1>All clients belonging to as single engineer</h1>
         </ProtectedRoute>
-        <ProtectedRoute path="/users/:id/projects/:id" exact={true}>
+        <ProtectedRoute path="/users/:artistId/projects/:projectId" exact={true}>
           <h1>All songs on a project</h1>
         </ProtectedRoute>
-        <ProtectedRoute path="/users/:id/projects/:id/tracks/:id" exact={true}>
-          <h3>All versions of a single track here...</h3>
+        <ProtectedRoute path="/users/:artistId/projects/:projectId/tracks/:trackId" exact={true}>
+          <UploadFile />
         </ProtectedRoute>
         <Route>
           <h1>Looks like this page doesn't exist...</h1>
