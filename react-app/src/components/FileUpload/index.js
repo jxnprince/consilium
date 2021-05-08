@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom"
+import { useHistory, useParams } from "react-router-dom"
 import { useDispatch } from "react-redux";
 import { fileUpload } from "../../store/uploads"
 
@@ -10,16 +10,16 @@ const UploadFile = () => {
 	const [file, setFile] = useState(null);
 	// const [fileCreated, setFileCreated] = useState(false);
 	const [fileLoading, setFileLoading] = useState(false);
-	
+	const { artistId, projectId, trackId } = useParams();
 	
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setFileLoading(true)
 		
-		const createdFile = dispatch(fileUpload(file))
+		const res = dispatch(fileUpload(file, artistId, projectId, trackId))
 			setFileLoading(false);
 			// if (createdFile) setFileCreated(true)
-			if (createdFile) history.push("/");  //Wont need to redirect because of Modal?
+			if (res.ok) history.push("/");
 			else return {"Errors":"Something went wrong with file upload"}
 	}
 	

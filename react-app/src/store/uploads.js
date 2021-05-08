@@ -1,3 +1,4 @@
+import { useParams } from "react-router-dom";
 const UPLOAD_FILE = "versions/UPLOAD_FILE";
 const RENDER_FILE = "versions/RENDER_FILE";
 
@@ -11,12 +12,11 @@ const uploadFile = (url) => ({
 //     url
 // })
 
-
-export const fileUpload = (file) => async (dispatch) => {
+// "/users/:id/projects/:id/tracks/:id"
+export const fileUpload = (file, artistId, projectId, trackId) => async (dispatch) => {
     const formData = new FormData()
     formData.append("file", file)
-    const response = await fetch(`/api/files/`, {
-        // headers: { "content-type": 'multipart/form-data' },
+    const response = await fetch(`/api/users/${artistId}/projects/${projectId}/tracks/${trackId}/versions/new`, {
         method: "POST",
         body: formData,
     });
