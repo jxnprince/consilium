@@ -33,7 +33,18 @@ def engineerDash(user_id):
         artists = set()
         for artist in allArtists:
             artists.add(artist)
-        return {"Artists": [artist.to_dict() for artist in artists]}
+        artistReturn = [artist.to_dict() for artist in artists]
+        projectCount = []
+        for artist in artistReturn:
+            projectCount.append(Project.query.filter(Project.artistId == artist['id']).all())  # noqa
+        finalProjectReturn = []
+        for artistProjectList in projectCount:
+            for project in artistProjectList:
+                finalProjectReturn.append(project.to_dict())
+        return {
+            "Artists": artistReturn,
+            "Projects": finalProjectReturn
+        }
     else:
         return {"Errors": f'{user.firstName} {user.lastName} is unauthorized.'}
 
@@ -44,8 +55,20 @@ def artistDash(id):
     '''
     Returns all projects associated with an artist. [X]
     '''
+    artist = User.query.get(id)
     projects = Project.query.filter(Project.artistId == id).all()
-    return {"Projects": [project.to_dict() for project in projects]}
+    tracks = []
+    for project in projects:
+        list = Track.query.filter(Track.projectId == project.id).all()
+        projectTracks = [track.to_dict() for track in list]
+        tracks.append(projectTracks)
+    print(tracks)
+
+    return {
+        "Projects": [project.to_dict() for project in projects],
+        "Tracks": tracks,
+        "Artist": artist.to_dict()
+    }
 
 
 @user_routes.route('/<int:artistId>/projects/<int:projectId>')

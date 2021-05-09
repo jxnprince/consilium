@@ -30,7 +30,6 @@ function App() {
           <SplashLayout />
         </Route>
         <ProtectedRoute path="/users/:artistId" exact={true}>
-          <h1>A projects belonging to a single artist</h1>
           <NavbarLeft />
           <ArtistDashboard />
         </ProtectedRoute>
