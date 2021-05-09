@@ -21,7 +21,7 @@ def validation_errors_to_error_messages(validation_errors):
 
 
 @user_routes.route('/<int:user_id>')
-@login_required
+# @login_required
 def engineerDash(user_id):
     '''
     Returns artists associated with an engineer [X]
@@ -42,7 +42,7 @@ def engineerDash(user_id):
 @login_required
 def artistDash(id):
     '''
-    Returns all projects associated with a project. [X]
+    Returns all projects associated with an artist. [X]
     '''
     projects = Project.query.filter(Project.artistId == id).all()
     return {"Projects": [project.to_dict() for project in projects]}
@@ -59,6 +59,7 @@ def projectDash(artistId, projectId):
     if project and project.artistId == artistId:
         if project.artistId == user.id or project.engineerId == user.id:  # noqa
             tracks = Track.query.filter(Track.projectId == projectId).all()
+            # versions = Version.query.filter(Version.trackId == trackId).all()  # noqa
             if tracks:
                 return {"Tracks": [track.to_dict() for track in tracks]}
         else:
@@ -81,7 +82,10 @@ def getAllTrackVersions(artistId, projectId, trackId):
         if project.artistId == artist.id:
             if project.artistId == user.id or project.engineerId == user.id:
                 versions = Version.query.filter(Version.trackId == trackId).all()  # noqa
-                return {"Versions": [version.to_dict() for version in versions]}  # noqa
+                return {
+                "Track": track.to_dict(),
+                "Versions": [version.to_dict() for version in versions]
+                }  # noqa
             else:
                 return {"Errors": 'User unauthorized'}
         else:

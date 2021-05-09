@@ -1,27 +1,24 @@
 import React,{ useState, useEffect } from 'react';
-import { Switch, Tooltip, Fab } from '@material-ui/core/';
+import { Switch } from '@material-ui/core/';
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../store/session";
 import {showModal, setCurrentModal} from '../../store/modal'
 import loginForm from '../auth/LoginForm'
 
 
-export default function SessionSwitch({classes}) {
+export default function SessionSwitch() {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user)
-  const [status, setStatus] = useState(user)
-  const [title, setTitle] = useState('Login')
+  const [checked, setChecked] = useState(false)
   
   useEffect(()=>{
-    setStatus(user)
-    if (!user) setTitle('Login')
-    else setTitle('Logout')
-    // console.log("=================================================", status)
+    !user ? setChecked(false) : setChecked(true)
   },[dispatch, user])
   
   
   const handleChange = () => {
     if (user == null) {
+      setChecked(true)
       dispatch(setCurrentModal(loginForm))
       dispatch(showModal())
     }else {
@@ -30,11 +27,12 @@ export default function SessionSwitch({classes}) {
   };
 
   return (
-    <Tooltip title={title}>
+    // <Tooltip title={title} placement='right'>
       <Switch
         color="primary"
         onChange={handleChange}
+        checked={checked}
       />
-    </Tooltip>
+    // </Tooltip>
   );
 }

@@ -21,10 +21,10 @@ const Root =  () => {
 
   return (
   <>
-    <MuiThemeProvider theme={theme}>
+    {/* <MuiThemeProvider theme={theme}> */}
       <App />
       <div ref={modalMooringRef} className='modal' />
-    </MuiThemeProvider>
+    {/* </MuiThemeProvider> */}
   </>
   );
 }
