@@ -1,1 +1,21 @@
-/* TODO Add site wide styles */
+  #root {
+    font-family: Roboto, sans-serif; 
+    font-weight: 400;
+    position:absolute;
+    top:0;
+    left:0;
+    height: 100vh;
+    width: 97.9vw;
+    padding-left: 35px;
+    background-color: #19191F;
+    color: #F5F5F1;
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+  }
+  
+  h1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }

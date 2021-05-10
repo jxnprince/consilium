@@ -1,0 +1,62 @@
+#splash-main{
+  height: 75vh;
+  width: 75vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.splash-info-div{
+  height: 100%;
+  width: 100%;
+  /* background-color: #F5F5F1; */
+}
+
+#logo{
+  background-image:url(../Assets/splashLogo.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 75%;
+  margin: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#join-btn-container{
+  width: 25%;
+  height: 8%;
+  margin-left: 37%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 25px;
+}
+
+#join-btn{
+  background-color: #51555E;
+  color: #9094A2;
+  font-weight: 600;
+  width: 40%;
+  height: 100%;
+  margin-bottom: 37%;
+  border-radius: 25px;
+  border: 0;
+  transition: 0.25s;
+  overflow: hidden;
+}
+
+#join-btn:hover {
+  background-color: #19191F;
+  color: #E3C06D;
+  border: 5px;
+  border-color: #51555E;
+}
+
+#join-btn:action {
+  color: #19191F;
+  background-color: #E3C06D;
+  border: 5px;
+  border-color: #51555E;
+}

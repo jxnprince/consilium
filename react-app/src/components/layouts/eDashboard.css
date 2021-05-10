@@ -1,0 +1,70 @@
+#edash-main{
+  height: 85vh;
+  width: 75vw;
+  margin-top: 12.5vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+#edash-flow{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  padding-top: 5vw;
+}
+
+#edash-flow > div {
+  flex: 33%;
+  /* margin: 5vh; */
+}
+
+#edash-heading{
+    position: absolute;
+    top: 0;
+    padding-top: 3.5vh;
+    width: 75vw;
+}
+
+.card{
+  max-width: 20vw;
+  background-color: #51555E;
+  border: 2px solid rgba(144, 148, 162, 0.1);
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  transition: 0.25s;
+}
+
+.card:hover{
+  border: 2px solid rgba(227, 192, 109,0.75);
+  border-top-left-radius: 12.5px;
+  border-top-right-radius: 12.5px;
+}
+
+.card-img {
+  width: 100%;
+  max-height: 75%;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.card-img:hover {
+  border-top-left-radius: 12.5px;
+  border-top-right-radius: 12.5px;
+}
+
+.card-body {
+  margin-top: 5%;
+  padding: 5%;
+  overflow: hidden;
+}
+
+#quarterNote-icon{
+  max-height: 25px;
+  padding-right: 5%;
+}
+
+#project-quantity{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}

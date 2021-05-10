@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from 'react';
+import { Container, Row, Col, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams, Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import './eDashboard.css'
+import splashLogo from '../Assets/splashLogo.png'
+import quarterNote from '../Assets/Iconography/quarterNote.png'
 
 export default function EngineerDashboard() {
   const { artistId }  = useParams()
+  const history = useHistory()
   const user = useSelector(state => state.session?.user)
   const [artists, setArtists] = useState([])
   const [projects, setProjects] = useState([])
+  useEffect(()=>{ if (!user?.superUser)history.push(`/users/${user?.id}`) },[user])
   
   useEffect(() => {
     async function fetchData() {
@@ -18,30 +25,46 @@ export default function EngineerDashboard() {
       fetchData();
 	}, []);
   
-  const artistComponents = artists?.map((artist)=>{
+  const handleCardClick = (id) => {
+    history.push(`/users/${id}`)
+  }
+  
+  const artistComponents = artists?.map((artist, i)=>{
     let artistId = artist?.id //find projectObj[artistId].length
     let count = 0
     return (
-      <div key={artist?.id}>
+      <Card key={i}>
         {!!projects.forEach((project)=>{
         if (project.artistId == artistId) count++
         })}
-        <span>{artist?.firstName} {artist?.lastName} : {count}</span>
-      </div>
+        <a style={{ cursor: 'pointer' }} onClick={()=> handleCardClick(artist.id)}>
+            <Card.Img src={splashLogo} id="card-img" />
+              <Card.Body>
+                <Card.Title>{artist?.firstName} {artist?.lastName}</Card.Title>
+                <span id="project-quantity">
+                  <img src={quarterNote} id='quarterNote-icon' />
+                  <p id="count">{count}</p>
+                </span>
+              </Card.Body>
+        </a>
+          </ Card>
 		)
   })
 
-    if (user?.superUser && user?.id == artistId) {
+
     return(
       <>
-        <h1>{user?.firstName}'s Dashboard</h1>
-        <hr/>
-        {artistComponents}
+      <Container id="edash-heading">
+          <Row>
+            <h1> {user?.firstName}'s Dashboard </h1>
+            <hr/>
+          </Row>
+      </Container>
+        <Container id="edash-main">
+          <Container id="edash-flow">
+            {artistComponents}
+          </Container>
+        </Container>
       </>
     )
-  // } else if (user?.superUser){
-  //   return <Redirect to={`/users/${artistId}/artists`} />
-  // } else {
-  //   return <Redirect to={`/users/${artistId}`} />
-  }
 }
