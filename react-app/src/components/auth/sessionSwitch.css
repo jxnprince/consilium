@@ -1,0 +1,7 @@
+  #switch-container {
+  max-width: 4vw;
+  min-width: 50px;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0px 5px 12px;
+  }

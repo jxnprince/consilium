@@ -4,6 +4,7 @@ import { logout } from "../../store/session";
 import {showModal, setCurrentModal} from '../../store/modal'
 import loginForm from '../auth/LoginForm'
 import Switch from "react-switch";
+import './sessionSwitch.css'
 
 
 export default function SessionSwitch() {
@@ -28,18 +29,21 @@ export default function SessionSwitch() {
 
   return (
   <>
+  <div id="switch-container">
       <Switch
         className="react-switch"
         id="session-switch"
         onChange={handleChange}
         checked={checked}
-        onColor="#ffc107"
-        offColor="#263238"
-        handleDiameter={22}
-        BoxShadow="0px 1px 5px rgba(38, 50, 56, 0.2)"
+        onColor="#E3C06D"
+        offColor="#19191F"
+        handleDiameter={15}
+        boxShadow="0px 1px 5px rgba(38, 50, 56, 0.2)"
         activeBoxShadow="0px 1px 5px rgba(38, 50, 56, 0.6)"
-        height={20}
-        width={48}
+        border={1}
+        border-color="#E3C06D"
+        height={15}
+        width={40}
         uncheckedIcon={false}
         checkedIcon={false}
         uncheckedHandleIcon={
@@ -49,14 +53,14 @@ export default function SessionSwitch() {
           justifyContent: "center",
           alignItems: "center",
           height: "100%",
-          fontSize: 10,
+          fontSize: 7,
           borderRadius: 50,
-          color: "#263238",
-          backgroundColor: "#ffc107",
+          color: "#19191F",
+          backgroundColor: "#E3C06D",
           paddingRight: 2
         }}
       >
-        <i class="fas fa-sign-in-alt"></i>
+        <i className="fas fa-sign-in-alt"></i>
       </div>
     }
         checkedHandleIcon={
@@ -66,18 +70,18 @@ export default function SessionSwitch() {
           justifyContent: "center",
           alignItems: "center",
           height: "100%",
-          fontSize: 10,
-          backgroundColor: "#263238",
+          fontSize: 7,
+          backgroundColor: "#19191F",
           borderRadius: 50,
           color: "#ffc107",
           paddingLeft: 2
         }}
       >
-        <i class="fas fa-sign-out-alt"></i>
+        <i className="fas fa-sign-out-alt"></i>
       </div>
     }
       />
-
+</div>
   </>
   );
 }
