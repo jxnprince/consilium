@@ -21,7 +21,7 @@ def validation_errors_to_error_messages(validation_errors):
 
 
 @user_routes.route('/<int:user_id>')
-@login_required
+# @login_required
 def engineerDash(user_id):
     '''
     Returns artists associated with an engineer [X]
@@ -33,7 +33,18 @@ def engineerDash(user_id):
         artists = set()
         for artist in allArtists:
             artists.add(artist)
-        return {"Artists": [artist.to_dict() for artist in artists]}
+        artistReturn = [artist.to_dict() for artist in artists]
+        projectCount = []
+        for artist in artistReturn:
+            projectCount.append(Project.query.filter(Project.artistId == artist['id']).all())  # noqa
+        finalProjectReturn = []
+        for artistProjectList in projectCount:
+            for project in artistProjectList:
+                finalProjectReturn.append(project.to_dict())
+        return {
+            "Artists": artistReturn,
+            "Projects": finalProjectReturn
+        }
     else:
         return {"Errors": f'{user.firstName} {user.lastName} is unauthorized.'}
 
@@ -42,10 +53,22 @@ def engineerDash(user_id):
 @login_required
 def artistDash(id):
     '''
-    Returns all projects associated with a project. [X]
+    Returns all projects associated with an artist. [X]
     '''
+    artist = User.query.get(id)
     projects = Project.query.filter(Project.artistId == id).all()
-    return {"Projects": [project.to_dict() for project in projects]}
+    tracks = []
+    for project in projects:
+        list = Track.query.filter(Track.projectId == project.id).all()
+        projectTracks = [track.to_dict() for track in list]
+        tracks.append(projectTracks)
+    print(tracks)
+
+    return {
+        "Projects": [project.to_dict() for project in projects],
+        "Tracks": tracks,
+        "Artist": artist.to_dict()
+    }
 
 
 @user_routes.route('/<int:artistId>/projects/<int:projectId>')
@@ -59,8 +82,20 @@ def projectDash(artistId, projectId):
     if project and project.artistId == artistId:
         if project.artistId == user.id or project.engineerId == user.id:  # noqa
             tracks = Track.query.filter(Track.projectId == projectId).all()
+            artist = User.query.get(project.artistId)
+            allTracks = [track.to_dict() for track in tracks]
+            allVersions = {}
+            for track in allTracks:
+                # print(track['id'])
+                allVersions[track['id']] = len(Version.query.filter(Version.trackId == track['id']).all())  # noqa
+            print(allVersions)
             if tracks:
-                return {"Tracks": [track.to_dict() for track in tracks]}
+                return {
+                    "Artist": artist.to_dict(),
+                    "Project": project.to_dict(),
+                    "Tracks": allTracks,
+                    "Versions": allVersions
+                }
         else:
             return {"Errors": f'{user.firstName} {user.lastname} unauthorized'}
     else:
@@ -81,7 +116,12 @@ def getAllTrackVersions(artistId, projectId, trackId):
         if project.artistId == artist.id:
             if project.artistId == user.id or project.engineerId == user.id:
                 versions = Version.query.filter(Version.trackId == trackId).all()  # noqa
-                return {"Versions": [version.to_dict() for version in versions]}  # noqa
+                return {
+                    "Artist": artist.to_dict(),
+                    "Project": project.to_dict(),
+                    "Track": track.to_dict(),
+                    "Versions": [version.to_dict() for version in versions]
+                }
             else:
                 return {"Errors": 'User unauthorized'}
         else:

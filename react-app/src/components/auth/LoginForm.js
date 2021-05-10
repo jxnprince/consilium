@@ -17,7 +17,7 @@ const LoginForm = () => {
     e.preventDefault();
     dispatch(login(email, password))
       .catch(err => setErrors(err.errors));
-    dispatch(hideModal())
+    if (errors.length === 0) dispatch(hideModal())
   };
 
   const updateEmail = (e) => {

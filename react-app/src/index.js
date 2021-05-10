@@ -6,6 +6,7 @@ import './index.css';
 import App from './App';
 import configureStore from './store/index'
 
+
 const store = configureStore();
 
 const Root =  () => {
@@ -19,8 +20,8 @@ const Root =  () => {
 
   return (
   <>
-    <App />
-    <div ref={modalMooringRef} className='modal' />
+      <App />
+      <div ref={modalMooringRef} className='modal' />
   </>
   );
 }

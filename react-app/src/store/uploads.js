@@ -1,10 +1,9 @@
-import { useParams } from "react-router-dom";
 const UPLOAD_FILE = "versions/UPLOAD_FILE";
 const RENDER_FILE = "versions/RENDER_FILE";
 
 const uploadFile = (url) => ({
-    type: UPLOAD_FILE,
-    url
+		type: UPLOAD_FILE,
+		url
 })
 
 // const renderVersion = (url) => ({
@@ -14,29 +13,29 @@ const uploadFile = (url) => ({
 
 // "/users/:id/projects/:id/tracks/:id"
 export const fileUpload = (file, artistId, projectId, trackId) => async (dispatch) => {
-    const formData = new FormData()
-    formData.append("file", file)
-    const response = await fetch(`/api/users/${artistId}/projects/${projectId}/tracks/${trackId}/versions/new`, {
-        method: "POST",
-        body: formData,
-    });
-    if (response.ok) {
-        const url = await response.json();
-        console.log(url)
-        dispatch(uploadFile(url))
-        return 
-    }else{
-        return {"Errors": "Could not contact server"}
-    }
+		const formData = new FormData()
+		formData.append("file", file)
+		const response = await fetch(`/api/users/${artistId}/projects/${projectId}/tracks/${trackId}/versions/new`, {
+				method: "POST",
+				body: formData,
+		});
+		if (response.ok) {
+				const url = await response.json();
+				console.log(url)
+				dispatch(uploadFile(url))
+				return 
+		}else{
+				return {"Errors": "Could not contact server"}
+		}
 }
 
 export default function uploadReducer(state = { url: null }, action) {
-    switch (action.type) {
-        case UPLOAD_FILE:
-            return { ...state, url: action.url };
-        default:
-            return state
-    }
+		switch (action.type) {
+				case UPLOAD_FILE:
+						return { ...state, url: action.url };
+				default:
+						return state
+		}
 }
 
 // export const commentOnVersion = (params) => async dispatch => {

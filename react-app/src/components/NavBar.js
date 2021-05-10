@@ -1,15 +1,14 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux'
-import LogoutButton from './auth/LogoutButton';
-import {showModal, hideModal, setCurrentModal} from '../store/modal'
+import {showModal, setCurrentModal} from '../store/modal'
 import loginForm from '../components/auth/LoginForm'
 import SignUpForm from '../components/auth/SignUpForm'
 import { login } from '../store/session';
+import SessionSwitch from './auth/sessionSwitch'
 
-const NavBar = () => {
-	const dispatch = useDispatch()
-
+export default function NavbarLeft() {
+  const dispatch = useDispatch()
+	
 	const showLogin = () =>{
 		dispatch(setCurrentModal(loginForm))
 		dispatch(showModal())
@@ -19,63 +18,50 @@ const NavBar = () => {
 		dispatch(setCurrentModal(SignUpForm))
 		dispatch(showModal())
 	}
-
+	
 	const guestLoginHandler = () =>{
 		dispatch(login('jxnP@bms.com', 'password'))
 	}
-
+	
+	
 	const user = useSelector(state => state.session.user)
-
 	if (!user){
-	return (
-		<nav>
-			<ul>
-				<li>
-					<button onClick={showLogin}> 
-						Log In
-					</button>
-				</li>
-				<li>
-					<button onClick={showSignup}> 
-						sign up
-					</button>
-				</li>
-				<li>
-					<button onClick={guestLoginHandler}> 
-						Take a tour
-					</button>
-				</li>
-			</ul>
-		</nav>
-	)} else if (user && user.superUser){
-	return (
-		<nav>
-			<ul>
-				<li>
-					<NavLink to="/" exact={true} activeClassName="active">
-						Home
-					</NavLink>
-				</li>
-				<li>
-					<LogoutButton />
-				</li>
-			</ul>
-		</nav>
-	)} else{
-	return (
-		<nav>
-			<ul>
-				<li>
-					<NavLink to="/" exact={true} activeClassName="active">
-						Home
-					</NavLink>
-				</li>
-				<li>
-					<LogoutButton />
-				</li>
-			</ul>
-		</nav>
-	)}
+    return (
+      <div>
+        {/* <Drawer
+          className={classes.drawer}
+          variant="permanent"
+          classes={{ paper: classes.drawerPaper }}
+          anchor="left"
+          color="secondary"
+        >
+          <div className={classes.toolbar} /> */}
+          <SessionSwitch />
+        {/* </Drawer> */}
+      </div>
+    )
+  } else if (user){
+  return(
+    <div>
+      {/* <Drawer
+        className={classes.drawer}
+        variant="permanent"
+        classes={{ paper: classes.drawerPaper }}
+        anchor="left"
+      >
+        <div className={classes.toolbar} /> */}
+        <SessionSwitch />
+        {/* <List>
+            <ListItem button key='Inbox'>
+              <Tooltip title='Dashboard' placement='right'>
+                <i className='material-icons'>grid_view</i>
+              </Tooltip>
+            </ListItem>
+        </List>
+      </Drawer> */}
+    </div>
+  )
+  }
 }
 
-export default NavBar;
+

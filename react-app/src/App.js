@@ -3,9 +3,14 @@ import { useDispatch, useSelector} from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { authenticate } from "./store/session";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
-import NavBar from "./components/NavBar";
+import NavbarLeft from "./components/NavBar";
+import SplashLayout from './components/layouts/splash'
+import EngineerDashboard from './components/layouts/eDashboard'
+import ArtistDashboard from './components/layouts/aDashboard'
+import ProjectDashboard from './components/layouts/pDashboard'
+import SongDashboard from './components/layouts/sDashboard'
 import Modal from './components/Modal'
-import UploadFile from './components/FileUpload/index'
+
 
 function App() {
   const dispatch = useDispatch()
@@ -17,24 +22,31 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar />
       <Modal />
+
       <Switch>
         <Route path="/" exact={true}>
+          <NavbarLeft />
+          <SplashLayout />
         </Route>
         <ProtectedRoute path="/users/:artistId" exact={true}>
-          <h1>A projects belonging to a single artist</h1>
+          <NavbarLeft />
+          <ArtistDashboard />
         </ProtectedRoute>
         <ProtectedRoute path="/users/:artistId/artists" exact={true}>
-          <h1>All clients belonging to as single engineer</h1>
+          <NavbarLeft />
+          <EngineerDashboard />
         </ProtectedRoute>
         <ProtectedRoute path="/users/:artistId/projects/:projectId" exact={true}>
-          <h1>All songs on a project</h1>
+          <NavbarLeft />
+          <ProjectDashboard />
         </ProtectedRoute>
-        <ProtectedRoute path="/users/:artistId/projects/:projectId/tracks/:trackId" exact={true}>
-          <UploadFile />
+        <ProtectedRoute path="/users/:artistId/projects/:projectId/tracks/:trackId/" exact={true}>
+          <NavbarLeft />
+          <SongDashboard />
         </ProtectedRoute>
         <Route>
+          <NavbarLeft />
           <h1>Looks like this page doesn't exist...</h1>
         </Route>
       </Switch>
