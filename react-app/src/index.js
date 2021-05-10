@@ -5,8 +5,7 @@ import { setModalMount } from './store/modal'
 import './index.css';
 import App from './App';
 import configureStore from './store/index'
-import { MuiThemeProvider } from '@material-ui/core'
-import { theme } from './theme'
+
 
 const store = configureStore();
 
@@ -21,10 +20,8 @@ const Root =  () => {
 
   return (
   <>
-    {/* <MuiThemeProvider theme={theme}> */}
       <App />
       <div ref={modalMooringRef} className='modal' />
-    {/* </MuiThemeProvider> */}
   </>
   );
 }
