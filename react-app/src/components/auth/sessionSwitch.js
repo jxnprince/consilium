@@ -28,7 +28,6 @@ export default function SessionSwitch() {
 
   return (
   <>
-
       <Switch
         className="react-switch"
         id="session-switch"
