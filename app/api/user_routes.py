@@ -117,9 +117,11 @@ def getAllTrackVersions(artistId, projectId, trackId):
             if project.artistId == user.id or project.engineerId == user.id:
                 versions = Version.query.filter(Version.trackId == trackId).all()  # noqa
                 return {
-                "Track": track.to_dict(),
-                "Versions": [version.to_dict() for version in versions]
-                }  # noqa
+                    "Artist": artist.to_dict(),
+                    "Project": project.to_dict(),
+                    "Track": track.to_dict(),
+                    "Versions": [version.to_dict() for version in versions]
+                }
             else:
                 return {"Errors": 'User unauthorized'}
         else:

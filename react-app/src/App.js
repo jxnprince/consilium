@@ -41,7 +41,7 @@ function App() {
           <NavbarLeft />
           <ProjectDashboard />
         </ProtectedRoute>
-        <ProtectedRoute path="/users/:artistId/projects/:projectId/tracks/:trackId" exact={true}>
+        <ProtectedRoute path="/users/:artistId/projects/:projectId/tracks/:trackId/" exact={true}>
           <NavbarLeft />
           <SongDashboard />
         </ProtectedRoute>
