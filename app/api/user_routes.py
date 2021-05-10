@@ -82,9 +82,20 @@ def projectDash(artistId, projectId):
     if project and project.artistId == artistId:
         if project.artistId == user.id or project.engineerId == user.id:  # noqa
             tracks = Track.query.filter(Track.projectId == projectId).all()
-            # versions = Version.query.filter(Version.trackId == trackId).all()  # noqa
+            artist = User.query.get(project.artistId)
+            allTracks = [track.to_dict() for track in tracks]
+            allVersions = {}
+            for track in allTracks:
+                # print(track['id'])
+                allVersions[track['id']] = len(Version.query.filter(Version.trackId == track['id']).all())  # noqa
+            print(allVersions)
             if tracks:
-                return {"Tracks": [track.to_dict() for track in tracks]}
+                return {
+                    "Artist": artist.to_dict(),
+                    "Project": project.to_dict(),
+                    "Tracks": allTracks,
+                    "Versions": allVersions
+                }
         else:
             return {"Errors": f'{user.firstName} {user.lastname} unauthorized'}
     else:

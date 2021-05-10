@@ -30,9 +30,8 @@ export default function ArtistDashboard() {
     })
     return (
       <div key={project?.id}>
-        <span>{project?.name}</span>
-        <span>{artist?.firstName} {artist?.lastName}</span>
-        <span>{songCount}</span>
+        <span> {project?.name} </span>
+        <span> {songCount} </span>
       </div>
 		)
   })

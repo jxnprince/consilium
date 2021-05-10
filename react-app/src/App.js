@@ -38,7 +38,6 @@ function App() {
           <EngineerDashboard />
         </ProtectedRoute>
         <ProtectedRoute path="/users/:artistId/projects/:projectId" exact={true}>
-          <h1>All songs on a project</h1>
           <NavbarLeft />
           <ProjectDashboard />
         </ProtectedRoute>
