@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux'
-import { useParams, Redirect } from "react-router-dom";
+import { useSelector } from 'react-redux'
+import { useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { Container, Row, Card } from 'react-bootstrap';
+import splashLogo from '../Assets/splashLogo.png'
+import eighthNote from '../Assets/Iconography/eighthNote.png'
+import './aDashboard.css'
 
 export default function ArtistDashboard() {
   const { artistId }  = useParams()
+  const history = useHistory()
   const user = useSelector(state => state.session?.user)
   const [projects, setProjects] = useState([])
   const [artist, setArtist] = useState([])
@@ -19,28 +25,53 @@ export default function ArtistDashboard() {
     }
       fetchData();
 	}, []);
+	
+	const handleCardClick = (aId, pId) => {
+    history.push(`/users/${aId}/projects/${pId}`)
+  }
 
 
   const projectComponents = projects?.map((project)=>{
     let songCount;
+    const findProjectArtwork = (project) => {
+        if (project.artwork) return project.artwork
+        else return splashLogo
+    }
     tracks.forEach((listOfTracks, i)=>{
       if (listOfTracks[i].projectId == project.id){
         songCount = listOfTracks.length
       }
     })
     return (
-      <div key={project?.id}>
-        <span> {project?.name} </span>
-        <span> {songCount} </span>
-      </div>
+      <Card key={project.id}>
+        <a style={{ cursor: 'pointer' }} onClick={()=> handleCardClick(artist?.id, project?.id)}>
+            <Card.Img src={findProjectArtwork(project)} id="card-img" />
+              <Card.Body>
+                <Card.Title>{project?.name}</Card.Title>
+                <span id="track-quantity">
+                  <img src={eighthNote} id='eighthNote-icon' />
+                  <p id="count">{songCount}</p>
+                </span>
+              </Card.Body>
+        </a>
+          </ Card>
+
 		)
   })
 
     return(
       <>
-        <h1>{artist?.firstName}  {artist.lastName}'s Dashboard</h1>
-        <hr/>
-        {projectComponents}
+      <Container id="adash-heading">
+          <Row>
+            <h1> {artist?.firstName} {artist?.lastName}'s Dashboard </h1>
+            <hr/>
+          </Row>
+      </Container>
+      <Container id="adash-main">
+        <Container id="adash-flow">
+          {projectComponents}
+        </Container>
+      </Container>
       </>
     )
   }

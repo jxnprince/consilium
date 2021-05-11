@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, Card } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux'
-import { useParams, Redirect } from "react-router-dom";
+import { Container, Row, Card } from 'react-bootstrap';
+import { useSelector } from 'react-redux'
+import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import './eDashboard.css'
 import splashLogo from '../Assets/splashLogo.png'
 import quarterNote from '../Assets/Iconography/quarterNote.png'
+import './eDashboard.css'
 
 export default function EngineerDashboard() {
   const { artistId }  = useParams()
