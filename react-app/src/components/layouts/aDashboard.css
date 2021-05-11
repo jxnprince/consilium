@@ -26,39 +26,6 @@
     width: 75vw;
 }
 
-.card{
-  max-width: 20vw;
-  background-color: #51555E;
-  border: 2px solid rgba(144, 148, 162, 0.1);
-  border-top-left-radius: 25px;
-  border-top-right-radius: 25px;
-  transition: 0.25s;
-}
-
-.card:hover{
-  border: 2px solid rgba(227, 192, 109,0.75);
-  border-top-left-radius: 12.5px;
-  border-top-right-radius: 12.5px;
-}
-
-.card-img {
-  width: 100%;
-  max-height: 75%;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-}
-
-.card-img:hover {
-  border-top-left-radius: 12.5px;
-  border-top-right-radius: 12.5px;
-}
-
-.card-body {
-  margin-top: 5%;
-  padding: 5%;
-  overflow: hidden;
-}
-
 #eighthNote-icon{
   max-height: 25px;
   padding-right: 5%;
