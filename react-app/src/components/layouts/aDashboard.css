@@ -1,0 +1,38 @@
+#adash-main{
+  height: 85vh;
+  width: 75vw;
+  margin-top: 12.5vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  /* background-color: brown; */
+}
+
+#adash-flow{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  padding-top: 5vw;
+}
+
+#adash-flow > div {
+  flex: 33%;
+  /* margin: 5vh; */
+}
+
+#adash-heading{
+    position: absolute;
+    top: 0;
+    padding-top: 3.5vh;
+    width: 75vw;
+}
+
+#eighthNote-icon{
+  max-height: 25px;
+  padding-right: 5%;
+}
+
+#track-quantity{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
