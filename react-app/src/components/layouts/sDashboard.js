@@ -1,8 +1,10 @@
 import React, { useEffect, useState, version } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams, Redirect } from "react-router-dom";
+import { Container, Row, Col } from 'react-bootstrap';
 import UploadFile from '../FileUpload/index'
-
+import AudioPlayer from '../audioPlayer/index'
+import './sDashboard.css'
 
 export default function SongDashboard(){
   const { artistId, projectId, trackId }  = useParams()
@@ -39,36 +41,74 @@ export default function SongDashboard(){
     setCurrentVersion(versionURL)
   }
 
-  	  const VersionsComponent = (()=>{
-    return (
-      <div>
-        <span> {track.name} :</span>
-        <span>  {versions[track.id]}  </span>
-      </div>
-		)
-  })
+  // 	  const VersionsComponent = (()=>{
+  //   return (
+  //     <div>
+  //       <span> {track.name} :</span>
+  //       <span>  {versions[track.id]}  </span>
+  //     </div>
+	// 	)
+  // })
+
   if (versions.length){
     return(
     <>
-      <div>
-        <span>{track?.name}</span>
-        <span>{versions?.length}</span>
-        <select onChange={handleVersionChange}>
-          {versions.map((version, i) => <option value={version.url} key={version.id}>{`Mix no. ${i + 1}`}</option>)}
-        </select>
-      </div>
+      <Container id="sdash-main">
+        <Container id="sdash-heading">
+          <Row>
+            <h2>{track?.name}</h2>
+          </Row>
+          <hr/>
+          <Row>
+            <h4> {project?.name} | {artist?.firstName} {artist?.lastName} </h4>
+          </Row>
+        </Container>
+    
+        <Col>
+          <Row id="audio-player-container">
+            <AudioPlayer />
+          </Row>
+
+        <Row>
+          {/* <span>{track?.name}</span> */}
+          {/* <span>{versions?.length}</span> */}
+          <select onChange={handleVersionChange}>
+            {versions.map((version, i) => <option value={version.url} key={version.id}>{`Mix no. ${i + 1}`}</option>)}
+          </select>
+        </Row>
+        </Col>
+      </Container>
       {/* <UploadFile /> */}
     </>
     )}else{
         return(
     <>
-      <div>
-        <span>{track?.name}</span>
-        <span>No. Of Versions: {versions?.length} </span>
-        <select onChange={handleVersionChange}>
-          <option value={null} key={version.id}>{`No Mix Versions`}</option>)
-        </select>
-      </div>
+      <Container id="sdash-main">
+        <Container id="sdash-heading">
+          <Row>
+            <h2>{track?.name}</h2>
+          </Row>
+          <hr/>
+          <Row>
+            <h4> {project?.name} | {artist?.firstName} {artist?.lastName} </h4>
+          </Row>
+        </Container>
+    
+        <Col>
+          <Row id="audio-player-container">
+            <AudioPlayer />
+          </Row>
+
+          <Row>
+            {/* <span>{track?.name}</span> */}
+            {/* <span>No. Of Versions: {versions?.length} </span> */}
+            <select onChange={handleVersionChange}>
+              <option value={null} key={version.id}>{`No Mix Versions`}</option>)
+            </select>
+          </Row>
+
+        </Col>
+      </Container>
       {/* <UploadFile /> */}
     </>
     )

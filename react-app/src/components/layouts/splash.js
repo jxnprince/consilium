@@ -1,4 +1,4 @@
-import React,{ useState, useEffect } from 'react';
+import React,{ useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import {useDispatch, useSelector} from 'react-redux'
 import { useHistory } from "react-router-dom";
@@ -15,7 +15,7 @@ export default function SplashLayout () {
   useEffect(()=>{ 
   if (user)history.push(path) 
   else history.push('/')
-  },[user])
+  },[user, path, history])
 
   const showSignup = () =>{
 		dispatch(setCurrentModal(SignUpForm))
