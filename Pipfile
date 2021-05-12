@@ -35,9 +35,10 @@ autopep8 = "*"
 pylint = "*"
 yapf = "*"
 black = "*"
+boto3 = "==1.17.68"
 
 [requires]
-python_version = "3.9"
+python_version = "3.8.3"
 
 [pipenv]
 allow_prereleases = true

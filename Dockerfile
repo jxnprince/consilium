@@ -10,7 +10,7 @@ ENV REACT_APP_BASE_URL=https://consiliumm.herokuapp.com
 RUN npm install
 RUN npm run build
 
-FROM python:3.9
+FROM python:3.8.3
 
 # Setup Flask environment
 ENV FLASK_APP=app
@@ -26,6 +26,7 @@ COPY --from=build-stage /react-app/build/* app/static/
 # Install Python Dependencies
 RUN pip install -r requirements.txt
 RUN pip install psycopg2
+RUN pip install boto3
 
 # Run flask environment
 CMD gunicorn app:app
