@@ -1,0 +1,4 @@
+#audio-player{
+  display: flex;
+  flex-flow: column-reverse nowrap;
+}

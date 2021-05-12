@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Row, Card } from 'react-bootstrap';
 import { useSelector } from 'react-redux'
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import splashLogo from '../Assets/splashLogo.png'
 import quarterNote from '../Assets/Iconography/quarterNote.png'
 import './eDashboard.css'
 
 export default function EngineerDashboard() {
-  const { artistId }  = useParams()
+  // const { artistId }  = useParams()
   const history = useHistory()
   const user = useSelector(state => state.session?.user)
   const [artists, setArtists] = useState([])
@@ -35,9 +35,9 @@ export default function EngineerDashboard() {
     return (
       <Card key={i}>
         {!!projects.forEach((project)=>{
-        if (project.artistId == artistId) count++
+        if (project.artistId === artistId) count++
         })}
-        <a style={{ cursor: 'pointer' }} onClick={()=> handleCardClick(artist.id)}>
+        <div style={{ cursor: 'pointer' }} onClick={()=> handleCardClick(artist.id)}>
             <Card.Img src={splashLogo} id="card-img" />
               <Card.Body>
                 <Card.Title>{artist?.firstName} {artist?.lastName}</Card.Title>
@@ -46,7 +46,7 @@ export default function EngineerDashboard() {
                   <p id="count">{count}</p>
                 </span>
               </Card.Body>
-        </a>
+        </div>
           </ Card>
 		)
   })

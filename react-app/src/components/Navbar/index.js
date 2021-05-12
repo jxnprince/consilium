@@ -4,7 +4,7 @@ import {showModal, setCurrentModal} from '../../store/modal'
 import loginForm from '../auth/LoginForm'
 import SignUpForm from '../auth/SignUpForm'
 import { login } from '../../store/session';
-import { Container, Button } from 'react-bootstrap';
+import { Container, Col } from 'react-bootstrap';
 import SessionSwitch from '../auth/sessionSwitch'
 import './navbar.css'
 
@@ -12,19 +12,20 @@ export default function NavbarLeft() {
   const dispatch = useDispatch()
   const user = useSelector(state => state?.session?.user)
 	const path = user?.superUser ? `/users/${user?.id}/artists` : `/users/${user?.id}/`
-	const showLogin = () =>{
-		dispatch(setCurrentModal(loginForm))
-		dispatch(showModal())
-	}
 	
-	const showSignup = () =>{
-		dispatch(setCurrentModal(SignUpForm))
-		dispatch(showModal())
-	}
+	// const showLogin = () =>{
+	// 	dispatch(setCurrentModal(loginForm))
+	// 	dispatch(showModal())
+	// }
 	
-	const guestLoginHandler = () =>{
-		dispatch(login('jxnP@bms.com', 'password'))
-	}
+	// const showSignup = () =>{
+	// 	dispatch(setCurrentModal(SignUpForm))
+	// 	dispatch(showModal())
+	// }
+	
+	// const guestLoginHandler = () =>{
+	// 	dispatch(login('jxnP@bms.com', 'password'))
+	// }
 	
 	const DashButton = () =>{
 	return (
@@ -37,22 +38,22 @@ export default function NavbarLeft() {
 	
 	if (!user){
     return (
-      <div>
+      <Col id="outer-nav">
         <Container id="main-nav">
           <SessionSwitch />
           <hr/>
         </Container>
-      </div>
+      </Col>
     )
   } else if (user){
   return(
-      <div>
+      <Col id="outer-nav">
         <Container id="main-nav">
           <SessionSwitch />
           <hr/>
           <DashButton />
         </Container>
-      </div>
+      </Col>
   )
   }
 }
