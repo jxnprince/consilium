@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom"
 import { useDispatch } from "react-redux";
 import { fileUpload } from "../../store/uploads"
+import { hideModal } from "../../store/modal";
 
 
 const UploadFile = ({artistId, projectId,trackId}) => {
@@ -15,12 +16,12 @@ const UploadFile = ({artistId, projectId,trackId}) => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setFileLoading(true)
-		
 		const res = dispatch(fileUpload(file, artistId, projectId,trackId))
+		console.log(res)
 			setFileLoading(false);
 			// if (createdFile) setFileCreated(true)
-			if (res.ok) history.push("/");
-			else return {"Errors":"Something went wrong with file upload"}
+			dispatch(hideModal)
+			if (!res.ok) return {"Errors":"Something went wrong with file upload"}
 	}
 	
 	const updateFile = (e) => {
@@ -37,8 +38,8 @@ const UploadFile = ({artistId, projectId,trackId}) => {
 				accept="audio/*"
 				onChange={updateFile}
 			/>
-			{(file)&&<button type="submit">Upload new mix</button>}
 			{(fileLoading)&& <p>Loading...</p>}
+			{(file)&&<button type="submit">Upload new mix</button>}
 		</form>
 	)
 }

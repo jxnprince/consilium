@@ -18,14 +18,14 @@ export default function ArtistDashboard() {
   const [projects, setProjects] = useState([])
   const [artist, setArtist] = useState([])
 
+  async function fetchData() {
+    const response = await fetch(`/api/users/${artistId}/projects`);
+    const responseData = await response.json();
+    setProjects(responseData?.Projects)
+    setArtist(responseData?.Artist)
+  }
+  
   useEffect(() => {
-    async function fetchData() {
-      const response = await fetch(`/api/users/${artistId}/projects`);
-      const responseData = await response.json();
-      setProjects(responseData?.Projects)
-      setArtist(responseData?.Artist)
-      // setTracks(responseData?.Tracks)
-    }
       fetchData();
 	}, [dispatch, projects]);
 	
@@ -57,7 +57,7 @@ export default function ArtistDashboard() {
                 <Card.Title>{project?.name}</Card.Title>
                 <span id="track-quantity">
                   <img src={eighthNote} id='eighthNote-icon' />
-                  <p id="count">{songCount}</p>
+                  <p id="count">{project.trackCount}</p>
                 </span>
               </Card.Body>
         </a>

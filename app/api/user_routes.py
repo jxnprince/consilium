@@ -62,7 +62,7 @@ def artistDash(id):
         list = Track.query.filter(Track.projectId == project.id).all()
         projectTracks = [track.to_dict() for track in list]
         tracks.append(projectTracks)
-    print(tracks)
+    # print(tracks)
 
     return {
         "Projects": [project.to_dict() for project in projects],
@@ -88,7 +88,7 @@ def projectDash(artistId, projectId):
             for track in allTracks:
                 # print(track['id'])
                 allVersions[track['id']] = len(Version.query.filter(Version.trackId == track['id']).all())  # noqa
-            print(allVersions)
+            # print(allVersions)
             if tracks:
                 return {
                     "Artist": artist.to_dict(),
@@ -149,10 +149,32 @@ def createNewProject(artistID):
         )
         db.session.add(data)
         db.session.commit()
-        print(data)
+        # print(data)
         return data.to_dict()
     else:
         return {"Errors": "Form did not validate"}
+
+
+@user_routes.route('/<int:artistId>/projects/<int:projectId>/tracks/new', methods=['POST'])  # noqa
+@login_required
+def uploadTrack(artistId, projectId):
+    '''
+    Adds new track to a project
+    '''
+    user = current_user
+    if not user.superUser:
+        return {"Errors": "User Not Authorized to create a track"}
+    form = TrackForm()
+    project = Project.query.get(projectId).to_dict()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        data = Track(
+            name=form.data['name'],
+            projectId=project['id']
+        )
+        db.session.add(data)
+        db.session.commit()
+        return data.to_dict()
 
 
 @user_routes.route('/<int:artistId>/projects/<int:projectId>/tracks/<int:trackId>/versions/new', methods=['POST'])  # noqa
@@ -190,7 +212,6 @@ def uploadTrackVersion(artistId, projectId, trackId):
                             length=3,
                             trackId=track.id
                         )
-                        print(data.url, '------------------------------------------------')
                         db.session.add(data)
                         db.session.commit()
                         return data.to_dict()
@@ -210,7 +231,7 @@ def uploadTrackVersion(artistId, projectId, trackId):
 @login_required
 def deleteProject(artistId, projectId):
     '''
-    Deletes specified project with all associated versions, and comments [X]
+    Deletes specified project with all associated tracks, versions, and comments [X]
     '''
     user = current_user
     artist = User.query.get(artistId)
@@ -221,6 +242,31 @@ def deleteProject(artistId, projectId):
                 db.session.delete(project)
                 db.session.commit()
                 return {"Success": f"{project.name} was deleted."}
+            else:
+                return {"Errors": f'{user.firstName} {user.lastName} unauthorized to delete {project.name}'}  # noqa
+        else:
+            return {"Errors": f"{project.name} doesn't not belong to {artist.firstName} {artist.lastName}"}  # noqa
+    else:
+        return {"Errors": 'Project does not exist!'}
+
+
+@user_routes.route('/<int:artistId>/projects/<int:projectId>/tracks/<int:trackId>/delete', methods=['DELETE'])  # noqa
+@login_required
+def deleteTrack(artistId, projectId, trackId):
+    '''
+    Deletes specified track with all associated versions, and comments [X]
+    '''
+    user = current_user
+    artist = User.query.get(artistId)
+    project = Project.query.get(projectId)
+    track = Track.query.get(trackId)
+    if project:
+        if project.artistId == artist.id:
+            if project.engineerId == user.id:  # noqa
+                if track:
+                    db.session.delete(track)
+                    db.session.commit()
+                    return {"Success": f"{track.name} was deleted."}
             else:
                 return {"Errors": f'{user.firstName} {user.lastName} unauthorized to delete {project.name}'}  # noqa
         else:

@@ -15,5 +15,4 @@ user = current_user
 
 class TrackForm(FlaskForm):
     name = StringField('name', validators=[DataRequired()])
-    engineerId = IntegerField('engineerId')
-    artistId = IntegerField('artistId')
+    projectId = IntegerField('projectId')
