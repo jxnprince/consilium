@@ -2,7 +2,8 @@ import React,{ useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import {useDispatch, useSelector} from 'react-redux'
 import { useHistory } from "react-router-dom";
-import {showModal, setCurrentModal} from '../../store/modal'
+import { login } from '../../store/session'
+import {showModal, setCurrentModal, hideModal } from '../../store/modal'
 import SignUpForm from '../auth/SignUpForm'
 import './splash.css'
 
@@ -21,19 +22,34 @@ export default function SplashLayout () {
 		dispatch(setCurrentModal(SignUpForm))
 		dispatch(showModal())
 	}
+	
+	  const handleGuest = () =>{
+    dispatch(hideModal)
+    dispatch(login('jxnP@bms.com','password'))
+  }
 
 return(
 <>
   <Container id="splash-main">
-    <Row className="splash-info-div">
+    <Col className="splash-info-div">
       <Col id="logo" />
-      <Col id="join-btn-container">
-        <button id="join-btn" onClick={showSignup}>
-          Sign Up Today
-        </button>
-      </Col>
+      <Row id="join-btn-container">
 
-    </Row>
+        <div className="button-border">
+          <button id="join-btn" onClick={showSignup}>
+            Sign Up Today
+          </button>
+        </div>
+
+        <div className="button-border">
+          <button id="join-btn" onClick={handleGuest}>
+            Take a Tour
+          </button>
+        </div>
+
+      </Row>
+
+    </Col>
   </Container>
 </>
 )

@@ -13,7 +13,6 @@ def seed_tracks():
             Track(name='Anyone Seen The Light?', projectId=1),
             Track(name='Stranger(On The Docks)', projectId=1),
             Track(name='The Backward Look', projectId=1),
-            Track(name='The Backward Look', projectId=1),
             Track(name='Stranger (On The Docks)', projectId=2),
             Track(name='Bloodsport', projectId=2),
             Track(name='Rules of Verse', projectId=2),

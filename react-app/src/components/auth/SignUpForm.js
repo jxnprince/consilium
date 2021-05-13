@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from 'react-router-dom';
-import { signUp } from '../../store/session';
+import { signUp, login } from '../../store/session';
 import { hideModal } from '../../store/modal'
 
 const SignUpForm = () => {
@@ -48,9 +48,12 @@ const SignUpForm = () => {
   const updateSuperUser = (e) => {
     setSuperUser(e.target.value);
   };
+  
 
-  if (sessionLoaded && user) {
-    return <Redirect to="/" />;
+  if (sessionLoaded && user && user.superUser) {
+    return <Redirect to={`/users/${user.id}/artists`} />;
+  }else if (sessionLoaded && user && !user.superUser){
+    return <Redirect to={`/users/${user.id}`} />
   }
 
   return (
