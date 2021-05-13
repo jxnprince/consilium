@@ -66,7 +66,7 @@ def artistDash(id):
 
     return {
         "Projects": [project.to_dict() for project in projects],
-        "Tracks": tracks,
+        # "Tracks": tracks,
         "Artist": artist.to_dict()
     }
 
@@ -149,6 +149,7 @@ def createNewProject(artistID):
         )
         db.session.add(data)
         db.session.commit()
+        print(data)
         return data.to_dict()
     else:
         return {"Errors": "Form did not validate"}
@@ -180,6 +181,7 @@ def uploadTrackVersion(artistId, projectId, trackId):
 
                         file.filename = get_unique_filename(file.filename)
                         upload = upload_file_to_s3(file)
+                        db.session.flush()
                         if "url" not in upload:
                             return upload, 400
                         url = upload["url"]
@@ -188,6 +190,7 @@ def uploadTrackVersion(artistId, projectId, trackId):
                             length=3,
                             trackId=track.id
                         )
+                        print(data.url, '------------------------------------------------')
                         db.session.add(data)
                         db.session.commit()
                         return data.to_dict()

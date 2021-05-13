@@ -4,9 +4,11 @@ import { useParams, Redirect } from "react-router-dom";
 import { Container, Row, Col } from 'react-bootstrap';
 import UploadFile from '../FileUpload/index'
 import AudioPlayer from '../audioPlayer/index'
+import {showModal, hideModal, setCurrentModal} from '../../store/modal'
 import './sDashboard.css'
 
 export default function SongDashboard(){
+  const dispatch = useDispatch()
   const { artistId, projectId, trackId }  = useParams()
   const [artist, setArtist] = useState([])
   const [project, setProject] = useState([])
@@ -40,24 +42,30 @@ export default function SongDashboard(){
     console.log(e.target.value)
     setCurrentVersion(versionURL)
   }
-
-  // 	  const VersionsComponent = (()=>{
-  //   return (
-  //     <div>
-  //       <span> {track.name} :</span>
-  //       <span>  {versions[track.id]}  </span>
-  //     </div>
-	// 	)
-  // })
-
-  if (versions.length){
+  
+  const uploaderContainer = ()=>{
+  return (<UploadFile  artistId={artistId}  projectId={projectId} trackId={trackId}/>)
+  }
+  
+  const handleUpload = () => {
+    dispatch(setCurrentModal(uploaderContainer))
+    dispatch(showModal())
+  }
+  
     return(
     <>
       <Container id="sdash-main">
         <Container id="sdash-heading">
+        <Col>
           <Row>
             <h2>{track?.name}</h2>
           </Row>
+          <Row>
+            <button onClick={handleUpload}>
+              <i className="fas fa-plus"></i>
+            </button>
+          </Row>
+        </Col>
           <hr/>
           <Row>
             <h4> {project?.name} | {artist?.firstName} {artist?.lastName} </h4>
@@ -78,39 +86,6 @@ export default function SongDashboard(){
         </Row>
         </Col>
       </Container>
-      {/* <UploadFile /> */}
-    </>
-    )}else{
-        return(
-    <>
-      <Container id="sdash-main">
-        <Container id="sdash-heading">
-          <Row>
-            <h2>{track?.name}</h2>
-          </Row>
-          <hr/>
-          <Row>
-            <h4> {project?.name} | {artist?.firstName} {artist?.lastName} </h4>
-          </Row>
-        </Container>
-    
-        <Col>
-          <Row id="audio-player-container">
-            <AudioPlayer />
-          </Row>
-
-          <Row>
-            {/* <span>{track?.name}</span> */}
-            {/* <span>No. Of Versions: {versions?.length} </span> */}
-            <select onChange={handleVersionChange}>
-              <option value={null} key={version.id}>{`No Mix Versions`}</option>)
-            </select>
-          </Row>
-
-        </Col>
-      </Container>
-      {/* <UploadFile /> */}
     </>
     )
-    }
 }
