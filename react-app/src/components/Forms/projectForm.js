@@ -6,8 +6,6 @@ import { hideModal } from '../../store/modal'
 
 
 const ProjectForm = ({ artistId }) => {
-  // const { artistId } = useParams()
-  // debugger
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
   const [errors, setErrors] = useState([]);

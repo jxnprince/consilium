@@ -5,17 +5,15 @@ import { login } from "../../store/session";
 import { hideModal } from '../../store/modal'
 
 
-const TrackForm = () => {
-  const { artistId } = useParams()
+const TrackForm = ({artistId, projectId}) => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
   const [errors, setErrors] = useState([]);
   const [name, setName] = useState("");
-  // const [password, setPassword] = useState("");
 
   const handleTrack = async (e) => {
     e.preventDefault();
-    const res = await fetch(`YOU DIDN'T MAKE THIS ROUTE, DUMBASS`, {
+    const res = await fetch(`/api/users/${artistId}/projects/${projectId}/tracks/new`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name })
@@ -29,9 +27,7 @@ const TrackForm = () => {
     if (errors.length === 0) dispatch(hideModal())
   };
   
-  const updateName = (e) => {
-    setName(e.target.value)
-  }
+  const updateName = (e) => setName(e.target.value)
 
   return (
     <form onSubmit={handleTrack}>

@@ -18,14 +18,14 @@ export default function ArtistDashboard() {
   const [projects, setProjects] = useState([])
   const [artist, setArtist] = useState([])
 
-  async function fetchData() {
-    const response = await fetch(`/api/users/${artistId}/projects`);
-    const responseData = await response.json();
-    setProjects(responseData?.Projects)
-    setArtist(responseData?.Artist)
-  }
   
   useEffect(() => {
+    async function fetchData() {
+      const response = await fetch(`/api/users/${artistId}/projects`);
+      const responseData = await response.json();
+      setProjects(responseData?.Projects)
+      setArtist(responseData?.Artist)
+    }
       fetchData();
 	}, [dispatch, projects]);
 	

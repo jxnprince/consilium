@@ -231,7 +231,7 @@ def uploadTrackVersion(artistId, projectId, trackId):
 @login_required
 def deleteProject(artistId, projectId):
     '''
-    Deletes specified project with all associated tracks, versions, and comments [X]
+    Deletes project with associated tracks, versions, & comments
     '''
     user = current_user
     artist = User.query.get(artistId)

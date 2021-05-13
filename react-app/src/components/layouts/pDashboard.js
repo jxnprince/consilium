@@ -28,7 +28,7 @@ export default function ProjectDashboard(){
       setArtist(responseData?.Artist)
     }
       fetchData();
-	}, []);
+	}, [tracks]);
 	
 	useEffect(()=>{
 	// console.log(artist)
@@ -37,8 +37,13 @@ export default function ProjectDashboard(){
 	// console.log(versions)
 	},[tracks,project, artist])
 	
+	  const form = () => {
+  return (
+    <TrackForm artistId={artistId} projectId={projectId}/>
+  )}
+	
 	const handleModal = () =>{
-	  dispatch(setCurrentModal(TrackForm))
+	  dispatch(setCurrentModal(form))
 	  dispatch(showModal())
 	}
 	
