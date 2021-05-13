@@ -47,6 +47,10 @@ export default function ProjectDashboard(){
 	  dispatch(showModal())
 	}
 	
+	const goBack =()=>{
+	  // return useHistory(`/users/${artistId}/`)
+	}
+	
 		const handleTrackClick = (trackId) => {
     history.push(`/users/${artistId}/projects/${projectId}/tracks/${trackId}`)
   }
@@ -71,6 +75,9 @@ export default function ProjectDashboard(){
         <h2>{project?.name}</h2>
       </Row>
       <Row>
+        <button onClick={goBack}>
+          <i className="fas fa-arrow-left"></i>
+        </button>
         <button onClick={handleModal}>
           <i className="fas fa-plus"></i>
         </button>
