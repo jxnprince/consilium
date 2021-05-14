@@ -1,4 +1,4 @@
-import React, { useEffect, useState, version } from 'react';
+import React, { Suspense, useEffect, useState, version } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams, Redirect } from "react-router-dom";
 import { Container, Row, Col } from 'react-bootstrap';
@@ -24,17 +24,19 @@ export default function SongDashboard(){
       setTrack(responseData?.Track)
       setVersions(responseData?.Versions)
       setProject(responseData?.Project)
-      setCurrentVersion(responseData?.Versions[0].url)
-      console.log(responseData?.Versions)
+      setCurrentVersion(responseData?.Versions[0]?.url)
+      // console.log(responseData?.Versions)
     }
       fetchData();
-	}, []);
+	}, [hideModal]);
 
+  let player = <AudioPlayer url={currentVersion}/>
 
   const handleVersionChange = (e) => {
     const versionURL = e.target.value
-    console.log(e.target.value)
+    // console.log(e.target.value)
     setCurrentVersion(versionURL)
+    player = <AudioPlayer url={currentVersion}/>
   }
   
   const uploaderContainer = ()=>{
@@ -45,6 +47,7 @@ export default function SongDashboard(){
     dispatch(setCurrentModal(uploaderContainer))
     dispatch(showModal())
   }
+  
   
     return(
     <>
@@ -68,7 +71,9 @@ export default function SongDashboard(){
     
         <Col>
           <Row id="audio-player-container">
-            <AudioPlayer url={currentVersion}/>
+          <Suspense>
+            {player}
+          </Suspense>
           </Row>
 
         <Row id="version-select">
