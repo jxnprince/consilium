@@ -1,13 +1,18 @@
 import React, { useCallback, useRef, useState, useMemo, useEffect } from "react";
+import { useCallbackRef } from 'use-callback-ref' 
 import { WaveSurfer, WaveForm } from "wavesurfer-react";
 import { Container, Row, Col } from 'react-bootstrap';
 import TimelinePlugin from "wavesurfer.js/dist/plugin/wavesurfer.timeline.min";
 import "./audioplayer.css";
 import  Country from "../Assets/country.mp3"
 
-export default function AudioPlayer(){
+export default function AudioPlayer(url){
 
-  const [waveform, setWaveform] = useState('')
+  const [waveform, setWaveform] = useState(false)
+  const [update, setUpdate] = useState()
+  
+  const rerender = () => setUpdate({})
+
   
   const plugins = useMemo(() => {
     return [
@@ -22,28 +27,25 @@ export default function AudioPlayer(){
     ].filter(Boolean);
   }, []);
 
+  const switchWaveform = (Waveform) => setWaveform(!waveform) 
 
-  const wavesurferRef = useRef();
+  const wavesurferRef = useCallbackRef(false, ()=> {
+    // wavesurferRef.current.load(Country);
+    wavesurferRef.current.load('https://consilium.s3-us-west-2.amazonaws.com/f347077a81a14fa5beae990bdd8d6220.wav');
+    wavesurferRef.current.on("waveform-ready", () => console.log("WaveSurfer is ready"));
+    rerender()
+  });
+  
   const handleWSMount = useCallback(function(waveSurfer){
-
-  //   const audio = fetch('https://consilium.s3-us-west-2.amazonaws.com/01+Country+Idea+Demo+(It+works).mp3', 
-  //   {mode:"no-cors"}).then((res)=>{
-  //   debugger;
-  //   return res.blob()
-  // }).then((data)=>{
-  //         debugger;
-  //         // console.log(data)
-  //       })
     wavesurferRef.current = waveSurfer;
     },[]
     );
     
-    useEffect(()=>{
-    wavesurferRef.current.load(Country);
-    // wavesurferRef.current.load('https://consilium.s3-us-west-2.amazonaws.com/01+Country+Idea+Demo+(It+works).mp3');
-    setWaveform('')
-    wavesurferRef.current.on("ready", () => console.log("WaveSurfer is ready"));
-  },[wavesurferRef])
+  //   useEffect(()=>{
+  //   // wavesurferRef.current.load(url);
+  //   wavesurferRef.current.load('https://consilium.s3-us-west-2.amazonaws.com/01+Country+Idea+Demo+(It+works).mp3');
+  //   wavesurferRef.current.on("ready", () => console.log("WaveSurfer is ready"));
+  // },[wavesurferRef, url])
 
   let xhr = { 
     mode: 'no-cors',
@@ -54,7 +56,7 @@ export default function AudioPlayer(){
   // headers: [{ key: 'Authorization', value: 'my-token' }]
   };
 
-  const play = () => wavesurferRef.current.playPause();
+  const play = () => wavesurferRef.current.playPause()
 
   return (
 
