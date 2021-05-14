@@ -24,18 +24,12 @@ export default function SongDashboard(){
       setTrack(responseData?.Track)
       setVersions(responseData?.Versions)
       setProject(responseData?.Project)
-      setCurrentVersion(responseData?.Versions[0])
+      setCurrentVersion(responseData?.Versions[0].url)
+      console.log(responseData?.Versions)
     }
       fetchData();
 	}, []);
 
-  // useEffect(()=>{
-  //   // console.log(artist, "=====ARTIST======")
-  //   // console.log(project, "=====PROJECT======")
-  //   // console.log(track, "=====TRACK======")
-  //   // console.log(versions, "=====VERSIONS======")
-  //   // console.log(currentVersion, "=====CURRENT+VERSIONS======")
-  // },[artist, project, track, versions, currentVersion])
 
   const handleVersionChange = (e) => {
     const versionURL = e.target.value
@@ -77,9 +71,7 @@ export default function SongDashboard(){
             <AudioPlayer url={currentVersion}/>
           </Row>
 
-        <Row>
-          {/* <span>{track?.name}</span> */}
-          {/* <span>{versions?.length}</span> */}
+        <Row id="version-select">
           <select onChange={handleVersionChange}>
             {versions.map((version, i) => <option value={version.url} key={version.id}>{`Mix no. ${i + 1}`}</option>)}
           </select>
