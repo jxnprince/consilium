@@ -9,7 +9,7 @@ const UploadFile = ({artistId, projectId,trackId}) => {
 	const dispatch = useDispatch()
 	const history = useHistory(); // so that we can redirect after the image upload is successful
 	const [file, setFile] = useState(null);
-	// const [fileCreated, setFileCreated] = useState(false);
+	const [fileCreated, setFileCreated] = useState(false);
 	const [fileLoading, setFileLoading] = useState(false);
 	// const { artistId, projectId, trackId } = useParams();
 	
@@ -18,9 +18,9 @@ const UploadFile = ({artistId, projectId,trackId}) => {
 		setFileLoading(true)
 		const res = dispatch(fileUpload(file, artistId, projectId,trackId))
 		console.log(res)
-			setFileLoading(false);
+			// setFileLoading(false);
 			// if (createdFile) setFileCreated(true)
-			dispatch(hideModal)
+			// dispatch(hideModal())
 			if (!res.ok) return {"Errors":"Something went wrong with file upload"}
 	}
 	
@@ -38,7 +38,7 @@ const UploadFile = ({artistId, projectId,trackId}) => {
 				accept="audio/*"
 				onChange={updateFile}
 			/>
-			{(fileLoading)&& <p>Loading...</p>}
+			{(fileLoading)&& <p>Uploading File...</p>}
 			{(file)&&<button type="submit">Upload new mix</button>}
 		</form>
 	)

@@ -13,13 +13,13 @@ const ProjectForm = ({ artistId }) => {
 
   const handleProject = async (artistId, e) => {
     e.preventDefault();
-    // debugger;
+
     const res = await fetch(`/api/users/${artistId}/projects/create`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name })
     })
-    // console.log(res, '===============================')
+
         const project = await res.json();
         if (project.errors) {
         const err = new Error('Unauthorized');
@@ -31,7 +31,7 @@ const ProjectForm = ({ artistId }) => {
       window.location.reload()
     }
   };
-  
+
   const updateName = (e) => {
     setName(e.target.value)
   }

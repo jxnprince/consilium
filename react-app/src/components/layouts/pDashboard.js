@@ -17,16 +17,17 @@ export default function ProjectDashboard(){
   const [tracks, setTracks] = useState([])
   const [project, setProject] = useState([])
   const [artist, setArtist] = useState([])
-    
+
+  async function fetchData() {
+    const response = await fetch(`/api/users/${artistId}/projects/${projectId}`);
+    const responseData = await response.json();
+    setVersions(responseData?.Versions)
+    setTracks(responseData?.Tracks)
+    setProject(responseData?.Project)
+    setArtist(responseData?.Artist)
+  }
+
   useEffect(() => {
-    async function fetchData() {
-      const response = await fetch(`/api/users/${artistId}/projects/${projectId}`);
-      const responseData = await response.json();
-      setVersions(responseData?.Versions)
-      setTracks(responseData?.Tracks)
-      setProject(responseData?.Project)
-      setArtist(responseData?.Artist)
-    }
       fetchData();
 	}, []);
 	
@@ -47,8 +48,14 @@ export default function ProjectDashboard(){
 	  dispatch(showModal())
 	}
 	
+	const handleDelete = async (aId, pId, tId) =>{
+	const response = await fetch(`/api/users/${aId}/projects/${pId}/tracks/${tId}/delete`, {method: 'DELETE'});
+  const responseData = await response?.json();
+  fetchData()
+	}
+	
 	const goBack =()=>{
-	  // return useHistory(`/users/${artistId}/`)
+	  return history.push(`/users/${artistId}/`)
 	}
 	
 		const handleTrackClick = (trackId) => {
@@ -57,11 +64,16 @@ export default function ProjectDashboard(){
 	
 	  const TracksComponent = tracks?.map((track)=>{
     return (
-      <Row key={track?.id} onClick={()=> handleTrackClick(track.id)} className="track-rows">
+      <Row key={track?.id} className="track-rows">
+              <div>
+                <i onClick={()=> handleDelete(artist.id, project.id, track.id)} className="far fa-trash-alt"></i>
+              </div>
         <span> {track.name} 
               <span>
+              <div onClick={()=> handleTrackClick(track.id)}>
                 <img src={sixteenthNote} id="sixteenthNote-icon"/>  
                 {versions[track.id]}  
+              </div>
               </span>
         </span>
       </Row>

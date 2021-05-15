@@ -14,7 +14,7 @@ export default function ArtistDashboard() {
   const { artistId }  = useParams()
   const dispatch = useDispatch()
   const history = useHistory()
-  // const user = useSelector(state => state.session?.user)
+  const user = useSelector(state => state.session?.user)
   const [projects, setProjects] = useState([])
   const [artist, setArtist] = useState([])
 
@@ -41,12 +41,24 @@ export default function ArtistDashboard() {
   const handleModal = () =>{
     dispatch(setCurrentModal(form))
     dispatch(showModal())
+    fetchData()
   }
   
   const handleDelete = async (id) => {
     const response = await fetch(`/api/users/${artistId}/projects/${id}/delete`, {method: 'DELETE'});
     const responseData = await response?.json();
     fetchData()
+  }
+  
+    const goBack =()=>{
+      return history.push(`/users/${artistId}/artists`)
+  }
+  
+  const backButton = () =>{
+    if (user?.superUser){
+    return <button onClick={goBack}><i className="fas fa-arrow-left"></i></button>
+    }
+    else return <div></div>
   }
 
 
@@ -79,6 +91,9 @@ export default function ArtistDashboard() {
           <Row>
             <h1> {artist?.firstName} {artist?.lastName}'s Dashboard </h1>
             <Row>
+              <button onClick={goBack}>
+                <i className="fas fa-arrow-left"></i>
+              </button>
               <button onClick={handleModal}>
                 <i className="fas fa-plus"></i>
               </button>
