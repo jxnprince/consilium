@@ -24,7 +24,10 @@ const TrackForm = ({artistId, projectId}) => {
         err.errors = user.errors
         throw err
     }
-    if (errors.length === 0) dispatch(hideModal())
+    if (errors.length === 0) {
+      dispatch(hideModal())
+      window.location.reload()
+    }
   };
   
   const updateName = (e) => setName(e.target.value)

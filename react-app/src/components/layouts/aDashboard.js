@@ -19,15 +19,16 @@ export default function ArtistDashboard() {
   const [artist, setArtist] = useState([])
 
   
+  async function fetchData() {
+    const response = await fetch(`/api/users/${artistId}/projects`);
+    const responseData = await response.json();
+    setProjects(responseData?.Projects)
+    setArtist(responseData?.Artist)
+  }
+  
   useEffect(() => {
-    async function fetchData() {
-      const response = await fetch(`/api/users/${artistId}/projects`);
-      const responseData = await response.json();
-      setProjects(responseData?.Projects)
-      setArtist(responseData?.Artist)
-    }
       fetchData();
-	}, [dispatch, projects]);
+	}, []);
 	
 	const handleCardClick = (aId, pId) => {
     history.push(`/users/${aId}/projects/${pId}`)
@@ -41,6 +42,12 @@ export default function ArtistDashboard() {
     dispatch(setCurrentModal(form))
     dispatch(showModal())
   }
+  
+  const handleDelete = async (id) => {
+    const response = await fetch(`/api/users/${artistId}/projects/${id}/delete`, {method: 'DELETE'});
+    const responseData = await response?.json();
+    fetchData()
+  }
 
 
   const projectComponents = projects?.map((project)=>{
@@ -51,13 +58,14 @@ export default function ArtistDashboard() {
       }
       return (
         <Card key={project.id}>
-        <a style={{ cursor: 'pointer' }} onClick={()=> handleCardClick(artist?.id, project?.id)}>
-            <Card.Img src={findProjectArtwork(project)} id="card-img" />
+        <a>
+            <Card.Img src={findProjectArtwork(project)} id="card-img" style={{ cursor: 'pointer' }} onClick={()=> handleCardClick(artist?.id, project?.id)}/>
               <Card.Body>
                 <Card.Title>{project?.name}</Card.Title>
                 <span id="track-quantity">
                   <img src={eighthNote} id='eighthNote-icon' />
                   <p id="count">{project.trackCount}</p>
+                  <i onClick={()=> handleDelete(project.id)} className="far fa-trash-alt"></i>
                 </span>
               </Card.Body>
         </a>

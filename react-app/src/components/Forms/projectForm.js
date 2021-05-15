@@ -19,14 +19,17 @@ const ProjectForm = ({ artistId }) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name })
     })
-    console.log(res, '===============================')
+    // console.log(res, '===============================')
         const project = await res.json();
         if (project.errors) {
         const err = new Error('Unauthorized');
         err.errors = user.errors
         throw err
     }
-    if (errors.length === 0) dispatch(hideModal())
+    if (errors.length === 0) {
+      dispatch(hideModal())
+      window.location.reload()
+    }
   };
   
   const updateName = (e) => {

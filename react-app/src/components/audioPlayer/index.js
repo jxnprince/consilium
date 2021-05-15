@@ -45,7 +45,7 @@ class AudioPlayer extends Component {
     return  (
       <WaveformContianer>
         <PlayButton onClick={this.handlePlay} >
-          {!this.state.playing ? <i class="fas fa-play"></i> : <i class="fas fa-pause"></i>}
+          {!this.state.playing ? <i className="fas fa-play"></i> : <i className="fas fa-pause"></i>}
         </PlayButton>
         <Wave id="waveform" />
         <audio id="track" src={url} />

@@ -28,14 +28,14 @@ export default function ProjectDashboard(){
       setArtist(responseData?.Artist)
     }
       fetchData();
-	}, [tracks]);
+	}, []);
 	
-	useEffect(()=>{
-	// console.log(artist)
-	// console.log(project)
-	// console.log(tracks)
-	// console.log(versions)
-	},[tracks,project, artist])
+	// useEffect(()=>{
+	// // console.log(artist)
+	// // console.log(project)
+	// // console.log(tracks)
+	// // console.log(versions)
+	// },[tracks,project, artist])
 	
 	  const form = () => {
   return (

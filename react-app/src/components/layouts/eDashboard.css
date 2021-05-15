@@ -25,6 +25,10 @@
     width: 75vw;
 }
 
+.fa-trash-alt{
+  cursor: pointer;
+}
+
 .card{
   max-width: 20vw;
   background-color: #51555E;

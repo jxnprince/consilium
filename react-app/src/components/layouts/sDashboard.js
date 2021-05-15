@@ -71,9 +71,7 @@ export default function SongDashboard(){
     
         <Col>
           <Row id="audio-player-container">
-          <Suspense>
             {player}
-          </Suspense>
           </Row>
 
         <Row id="version-select">
