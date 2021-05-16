@@ -1,7 +1,7 @@
 #adash-main{
-  height: 85vh;
+  height: 80vh;
   width: 75vw;
-  margin-top: 12.5vh;
+  margin-top: 17vh;
   overflow-x: hidden;
   overflow-y: scroll;
   /* background-color: brown; */
@@ -27,12 +27,18 @@
 }
 
 #eighthNote-icon{
+  float: left;
   max-height: 25px;
-  padding-right: 5%;
+  margin-left: 1vh;
+  margin-right: 1vh;
+  margin-top: 1vh;
 }
 
 #track-quantity{
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  /* display: flex;
+  align-items: center; */
+}
+
+#count{
+  float: left;
 }

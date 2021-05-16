@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import { Container, Row, Card } from 'react-bootstrap';
 import {showModal, hideModal, setCurrentModal} from '../../store/modal'
 import ProjectForm from '../Forms/projectForm'
-import splashLogo from '../Assets/splashLogo.png'
+import albumplaceholder from '../Assets/albumplaceholder.png'
 import eighthNote from '../Assets/Iconography/eighthNote.png'
 import './aDashboard.css'
 
@@ -56,7 +56,7 @@ export default function ArtistDashboard() {
   
   const backButton = () =>{
     if (user?.superUser){
-    return <button onClick={goBack}><i className="fas fa-arrow-left"></i></button>
+    return <button className='arrow' onClick={goBack}><i className="fas fa-arrow-left"></i></button>
     }
     else return <div></div>
   }
@@ -66,7 +66,7 @@ export default function ArtistDashboard() {
     let songCount;
       const findProjectArtwork = (project) => {
         if (project.artwork) return project.artwork
-        else return splashLogo
+        else return albumplaceholder
       }
       return (
         <Card key={project.id}>
@@ -77,7 +77,7 @@ export default function ArtistDashboard() {
                 <span id="track-quantity">
                   <img src={eighthNote} id='eighthNote-icon' />
                   <p id="count">{project.trackCount}</p>
-                  <i onClick={()=> handleDelete(project.id)} className="far fa-trash-alt"></i>
+                  <i onClick={()=> handleDelete(project.id)} className="far fa-trash-alt" id='can'></i>
                 </span>
               </Card.Body>
         </a>
@@ -90,11 +90,11 @@ export default function ArtistDashboard() {
       <Container id="adash-heading">
           <Row>
             <h1> {artist?.firstName} {artist?.lastName}'s Dashboard </h1>
-            <Row>
+            <Row className='plusback'>
               <button onClick={goBack}>
                 <i className="fas fa-arrow-left"></i>
               </button>
-              <button onClick={handleModal}>
+              <button className="plus" onClick={handleModal}>
                 <i className="fas fa-plus"></i>
               </button>
             </Row>

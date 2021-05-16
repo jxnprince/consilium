@@ -7,8 +7,7 @@ def seed_users():
             User(firstName='Jackson', lastName='Prince', email='jxnP@bms.com', password='password', superUser=True),  # noqa
             User(firstName='Evan', lastName='Reeves', email='evanR@bms.com', password='password', superUser=True),  # noqa
             User(firstName='Kingdom', lastName='Jasmine', email='bobbyB@kj.com', password='password', superUser=False),  # noqa
-            User(firstName='Amalgam', lastName='Effect', email='mattyM@ae.com', password='password', superUser=False),  # noqa
-            User(firstName='Dango', lastName='Rose', email='dannyR@er.com', password='password', superUser=False)  # noqa
+            User(firstName='At', lastName='Play', email='eli@ap.com', password='password', superUser=False),  # noqa
             ]
 
     for user in data:

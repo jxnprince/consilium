@@ -26,6 +26,7 @@ export const fileUpload = (file, artistId, projectId, trackId) => async (dispatc
 				console.log(url)
 				dispatch(uploadFile(url))
 				dispatch(hideModal())
+				window.location.reload()
 		}else{
 				return {"Errors": "Could not contact server"}
 		}

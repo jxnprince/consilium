@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams, Redirect } from "react-router-dom";
-import { useHistory } from "react-router-dom";
-import { Container, Row, Col } from 'react-bootstrap';
+import { useHistory } from "react-router-dom"; import { Container, Row, Col } from 'react-bootstrap';
 import {showModal, hideModal, setCurrentModal} from '../../store/modal'
 import TrackForm from '../Forms/trackForm'
 import splashLogo from '../Assets/splashLogo.png'
@@ -68,14 +67,14 @@ export default function ProjectDashboard(){
               <div>
                 <i onClick={()=> handleDelete(artist.id, project.id, track.id)} className="far fa-trash-alt"></i>
               </div>
-        <span> {track.name} 
-              <span>
-              <div onClick={()=> handleTrackClick(track.id)}>
-                <img src={sixteenthNote} id="sixteenthNote-icon"/>  
-                {versions[track.id]}  
-              </div>
+
+              <span id='track' onClick={()=> handleTrackClick(track.id)}>
+              <span id='trackName'>
+                {track.name} 
               </span>
-        </span>
+                <img src={sixteenthNote} id="sixteenthNote-icon"/>  
+                {versions[track.id]}
+              </span>
       </Row>
 		)
   })
@@ -87,10 +86,10 @@ export default function ProjectDashboard(){
         <h2>{project?.name}</h2>
       </Row>
       <Row>
-        <button onClick={goBack}>
+        <button onClick={goBack} className="arrow">
           <i className="fas fa-arrow-left"></i>
         </button>
-        <button onClick={handleModal}>
+        <button className="plus" onClick={handleModal}>
           <i className="fas fa-plus"></i>
         </button>
       </Row>

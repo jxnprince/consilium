@@ -3,6 +3,7 @@ import { useHistory, useParams } from "react-router-dom"
 import { useDispatch } from "react-redux";
 import { fileUpload } from "../../store/uploads"
 import { hideModal } from "../../store/modal";
+import './fileupload.css'
 
 
 const UploadFile = ({artistId, projectId,trackId}) => {
@@ -30,7 +31,7 @@ const UploadFile = ({artistId, projectId,trackId}) => {
 	}
 	
 	return (
-		<form onSubmit={handleSubmit}>
+		<form onSubmit={handleSubmit} id="uploadForm">
 		<h3> Upload New Mix Version </h3>
 			<input
 				id="file"
@@ -39,7 +40,7 @@ const UploadFile = ({artistId, projectId,trackId}) => {
 				onChange={updateFile}
 			/>
 			{(fileLoading)&& <p>Uploading File...</p>}
-			{(file)&&<button type="submit">Upload new mix</button>}
+			{(file)&&<button type="submit" id="upload-file">Upload new mix</button>}
 		</form>
 	)
 }

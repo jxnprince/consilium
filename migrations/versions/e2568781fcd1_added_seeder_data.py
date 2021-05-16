@@ -1,8 +1,8 @@
-"""version not updating
+"""added seeder data
 
-Revision ID: 4172cc97d9aa
+Revision ID: e2568781fcd1
 Revises: 
-Create Date: 2021-05-12 10:46:08.373058
+Create Date: 2021-05-16 12:47:00.767043
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '4172cc97d9aa'
+revision = 'e2568781fcd1'
 down_revision = None
 branch_labels = None
 depends_on = None

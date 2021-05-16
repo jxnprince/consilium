@@ -69,10 +69,10 @@ export default function SongDashboard(){
             <h2>{track?.name}</h2>
           </Row>
           <Row>
-            <button onClick={goBack}>
+            <button className="arrow" onClick={goBack}>
               <i className="fas fa-arrow-left"></i>
             </button>
-            <button onClick={handleUpload}>
+            <button className="plus" onClick={handleUpload}>
               <i className="fas fa-plus"></i>
             </button>
           </Row>

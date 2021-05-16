@@ -48,6 +48,7 @@ const TrackForm = ({artistId, projectId}) => {
           placeholder="Name"
           onChange={updateName}
           value={name}
+          autoComplete="on"
         />
       </div>
         <button type="submit">Create</button>

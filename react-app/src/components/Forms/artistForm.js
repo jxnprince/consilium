@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import  { useDispatch, useSelector } from "react-redux";
-import { Redirect, useParams } from "react-router-dom";
-import { login } from "../../store/session";
+import { useParams } from "react-router-dom";
 import { hideModal } from '../../store/modal'
 
 
@@ -45,7 +44,7 @@ const ArtistForm = () => {
         <input
           name="name"
           type="text"
-          placeholder="Name"
+          placeholder="Project Name"
           onChange={updateName}
           value={name}
         />
