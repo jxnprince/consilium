@@ -1,93 +1,57 @@
-import React, { useCallback, useRef, useState, useMemo, useEffect } from "react";
-import { WaveSurfer, WaveForm } from "wavesurfer-react";
+import React, { useCallback, useRef, useState, useMemo, useEffect, Component } from "react";
+import { useCallbackRef } from 'use-callback-ref' 
 import { Container, Row, Col } from 'react-bootstrap';
-import TimelinePlugin from "wavesurfer.js/dist/plugin/wavesurfer.timeline.min";
 import "./audioplayer.css";
 import  Country from "../Assets/country.mp3"
+import WaveSurfer from 'wavesurfer.js';
+import { WaveformContianer, Wave, PlayButton } from './waveform.styled';
 
-export default function AudioPlayer(){
-
-  const [waveform, setWaveform] = useState('')
-  
-  const plugins = useMemo(() => {
-    return [
-      { plugin: TimelinePlugin,
-        options: { 
-          container: "#timeline",
-          // primaryColor: "#E3C06D",
-          // secondaryColor: "#E3C06D",
-          // primaryFontColor: "#E3C06D",
-          }
-      }
-    ].filter(Boolean);
-  }, []);
-
-
-  const wavesurferRef = useRef();
-  const handleWSMount = useCallback(function(waveSurfer){
-
-  //   const audio = fetch('https://consilium.s3-us-west-2.amazonaws.com/01+Country+Idea+Demo+(It+works).mp3', 
-  //   {mode:"no-cors"}).then((res)=>{
-  //   debugger;
-  //   return res.blob()
-  // }).then((data)=>{
-  //         debugger;
-  //         // console.log(data)
-  //       })
-    wavesurferRef.current = waveSurfer;
-    },[]
-    );
+class AudioPlayer extends Component {  
+  state = { playing: false };
+  constructor(props){
+    super(props)
+    this.props=props
+  }
+  componentDidMount() {
+    const track = document.querySelector('#track');
+    this.waveform = WaveSurfer.create({
+      container: '#waveform',
+      backend: 'MediaElement',
+      xhr: { mode: 'no-cors' },
+      height: 80,
+      barWidth: 3.5,
+      barHeight: 4.5,
+      waveColor: '#51555E',
+      cursorWidth: 3,
+      cursorColor: '#E3C06D',
+      progressColor: '#E3C06D',
+      responsive: true,
+    });
     
-    useEffect(()=>{
-    wavesurferRef.current.load(Country);
-    // wavesurferRef.current.load('https://consilium.s3-us-west-2.amazonaws.com/01+Country+Idea+Demo+(It+works).mp3');
-    setWaveform('')
-    wavesurferRef.current.on("ready", () => console.log("WaveSurfer is ready"));
-  },[wavesurferRef])
-
-  let xhr = { 
-    mode: 'no-cors',
-    // method: 'GET',
-  // credentials: 'same-origin',
-  // redirect: 'follow',
-  // referrer: 'client',
-  // headers: [{ key: 'Authorization', value: 'my-token' }]
+    this.waveform.empty();
+    this.waveform.drawBuffer(track);
+    this.waveform.load(track);
+    this.waveform.on('waveform-ready',()=> console.log(`We Ready`))
   };
 
-  const play = () => wavesurferRef.current.playPause();
+  handlePlay = () => {
+    this.setState({ playing: !this.state.playing });
+    this.waveform.playPause();
+  };
 
-  return (
 
-    <Container id="audio-player">
-      <Row>
-        <button onClick={play}>Play / Pause</button>
-        <WaveSurfer 
-          plugins={plugins} 
-          onMount={handleWSMount}
-          mediaContainer={waveform} 
-          >
-            <WaveForm
-            xhr={xhr}
-            waveColor={'#51555E'} 
-            progressColor={'#E3C06D'}
-            cursorColor={'#E3C06D'}
-            barHeight={4.5}
-            minBarHeight={4.5}
-            barWidth={2}
-            // barGap={1}
-            barRadius={3}
-            responsive={true}
-            maxCanvasWidth={8000}
-            responsive={true}
-            backend={'MediaElement'}
-            preload={'auto'}
-            id="waveform" 
-            />
-  
-          <div id="timeline" />
-        </WaveSurfer>
-      </Row>
-    </Container>
+  render() {
+    const url = this.props.url? this.props.url : Country
+    return  (
+      <WaveformContianer>
+        <PlayButton onClick={this.handlePlay} >
+          {!this.state.playing ? <i className="fas fa-play"></i> : <i className="fas fa-pause"></i>}
+        </PlayButton>
+        <Wave id="waveform" />
+        <audio id="track" src={url} />
+      </WaveformContianer>
+    );
+  }
+};
 
-  );
-}
+export default AudioPlayer;

@@ -1,10 +1,9 @@
 #pdash-main{
-  height: 85vh;
+  height: 75vh;
   width: 75vw;
-  margin-top: 12.5vh;
+  margin-top: 21vh;
   overflow-x: hidden;
   overflow-y: scroll;
-  /* background-color: brown; */
 }
 
 #pdash-flow{
@@ -17,14 +16,19 @@
 
 .track-rows{
   width: 75%;
-  height: 5%;
+  height: 10%;
   margin: 1vh;
   border-radius: 10px;
-  display: flex;
-  flex-flow: row nowrap;
   background-color: #51555E;
   color: #9094A2;
   transition: 0.25s;
+}
+
+.fa-trash-alt{
+float: right;
+margin-bottom: 2%;
+margin-top: 2%;
+margin-right: 5%;
 }
 
 .track-rows:hover{
@@ -55,4 +59,24 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+}
+
+#name{
+  margin-top: 8%;
+  margin-left: 8%;
+}
+
+#track{
+  float: left;
+  margin-bottom: 2%;
+  margin-top: 2%;
+  /* flex-direction: row nowrap; */
+  width: 75%;
+}
+
+#trackName{
+  margin-left: 8%;
+  margin-right: 10%;
+  margin-bottom: 2%;
+  margin-top: 2%;
 }

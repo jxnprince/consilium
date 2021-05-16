@@ -107,6 +107,7 @@ const SignUpForm = () => {
       <div>
         <label>Engineer</label>
         <input
+          id ="check"
           type="checkbox"
           name="superUser"
           onChange={updateSuperUser}

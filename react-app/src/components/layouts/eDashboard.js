@@ -3,7 +3,7 @@ import { Container, Row, Card } from 'react-bootstrap';
 import { useSelector } from 'react-redux'
 // import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import splashLogo from '../Assets/splashLogo.png'
+import artistplaceholder from '../Assets/artistplaceholder.png'
 import quarterNote from '../Assets/Iconography/quarterNote.png'
 import './eDashboard.css'
 
@@ -38,7 +38,7 @@ export default function EngineerDashboard() {
         if (project.artistId === artistId) count++
         })}
         <div style={{ cursor: 'pointer' }} onClick={()=> handleCardClick(artist.id)}>
-            <Card.Img src={splashLogo} id="card-img" />
+            <Card.Img src={artistplaceholder} id="card-img" />
               <Card.Body>
                 <Card.Title>{artist?.firstName} {artist?.lastName}</Card.Title>
                 <span id="project-quantity">

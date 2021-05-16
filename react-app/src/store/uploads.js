@@ -1,3 +1,5 @@
+import { hideModal } from './modal'
+
 const UPLOAD_FILE = "versions/UPLOAD_FILE";
 const RENDER_FILE = "versions/RENDER_FILE";
 
@@ -23,7 +25,8 @@ export const fileUpload = (file, artistId, projectId, trackId) => async (dispatc
 				const url = await response.json();
 				console.log(url)
 				dispatch(uploadFile(url))
-				return 
+				dispatch(hideModal())
+				window.location.reload()
 		}else{
 				return {"Errors": "Could not contact server"}
 		}

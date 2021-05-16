@@ -7,12 +7,12 @@ from flask_login import current_user
 user = current_user
 
 
-def isEngineer(form, field):
-    print("Checking authentication...")
-    if not user.superUser:
-        raise ValidationError(f"{user.firstName} {user.lastName} is not authorized to create project")  # noqa
+# def isEngineer(form, field):
+#     print("Checking authentication...")
+#     if not user.superUser:
+#         raise ValidationError(f"{user.firstName} {user.lastName} is not authorized to create project")  # noqa
 
 
 class TrackForm(FlaskForm):
-    name = StringField('name', validators=[DataRequired(), isEngineer])
+    name = StringField('name', validators=[DataRequired()])
     projectId = IntegerField('projectId')

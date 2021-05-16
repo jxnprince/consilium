@@ -19,4 +19,6 @@ class Project(db.Model):
             "name": self.name,
             "engineerId": self.engineerId,
             "artistId": self.artistId,
+            "trackCount": len(self.tracks),
+            "tracks": [track.to_dict() for track in self.tracks]
         }
