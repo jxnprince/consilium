@@ -18,10 +18,6 @@ const UploadFile = ({artistId, projectId,trackId}) => {
 		e.preventDefault();
 		setFileLoading(true)
 		const res = dispatch(fileUpload(file, artistId, projectId,trackId))
-		console.log(res)
-			// setFileLoading(false);
-			// if (createdFile) setFileCreated(true)
-			// dispatch(hideModal())
 			if (!res.ok) return {"Errors":"Something went wrong with file upload"}
 	}
 	
