@@ -17,5 +17,6 @@ class Version(db.Model):
             "id": self.id,
             "url": self.url,
             "length": self.length,
-            "trackId": self.trackId
+            "trackId": self.trackId,
+            "comments": self.comments
         }

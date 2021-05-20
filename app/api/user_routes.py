@@ -159,7 +159,7 @@ def createNewProject(artistID):
 @login_required
 def uploadTrack(artistId, projectId):
     '''
-    Adds new track to a project
+    Adds new track to a project [X]
     '''
     user = current_user
     if not user.superUser:
@@ -181,8 +181,8 @@ def uploadTrack(artistId, projectId):
 @login_required
 def uploadTrackVersion(artistId, projectId, trackId):
     '''
-    Posts a new mix version to AWS []
-    Updates on database []
+    Posts a new mix version to AWS [X]
+    Updates on database [X]
     Updates on AWS [X]
     '''
     user = current_user
@@ -231,7 +231,7 @@ def uploadTrackVersion(artistId, projectId, trackId):
 @login_required
 def deleteProject(artistId, projectId):
     '''
-    Deletes project with associated tracks, versions, & comments
+    Deletes project with associated tracks, versions, & comments [X]
     '''
     user = current_user
     artist = User.query.get(artistId)

@@ -10,6 +10,7 @@ const ProjectForm = ({ artistId }) => {
   const user = useSelector(state => state.session.user);
   const [errors, setErrors] = useState([]);
   const [name, setName] = useState("");
+  const [artwork, setArtwork] = useState("");
 
   const handleProject = async (artistId, e) => {
     e.preventDefault();
@@ -35,6 +36,10 @@ const ProjectForm = ({ artistId }) => {
   const updateName = (e) => {
     setName(e.target.value)
   }
+  
+  const updateArtwork = (e) => {
+    setArtwork(e.target.value)
+  }
 
   return (
     <form onSubmit={(e)=> {
@@ -55,6 +60,16 @@ const ProjectForm = ({ artistId }) => {
           placeholder="Name"
           onChange={updateName}
           value={name}
+        />
+      </div>
+      <div>
+        <label>Project Artwork</label>
+        <input
+          name="artwork"
+          type="text"
+          placeholder="Image Url"
+          onChange={updateArtwork}
+          value={artwork}
         />
       </div>
         <button type="submit">Create</button>

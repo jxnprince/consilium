@@ -64,14 +64,11 @@ export default function ArtistDashboard() {
 
   const projectComponents = projects?.map((project)=>{
     let songCount;
-      const findProjectArtwork = (project) => {
-        if (project.artwork) return project.artwork
-        else return albumplaceholder
-      }
+      let projectArtwork = project.artwork? project.artwork : albumplaceholder
+      
       return (
         <Card key={project.id}>
-        <a>
-            <Card.Img src={findProjectArtwork(project)} id="card-img" style={{ cursor: 'pointer' }} onClick={()=> handleCardClick(artist?.id, project?.id)}/>
+            <Card.Img src={projectArtwork} id="card-img" style={{ cursor: 'pointer' }} onClick={()=> handleCardClick(artist?.id, project?.id)}/>
               <Card.Body>
                 <Card.Title>{project?.name}</Card.Title>
                 <span id="track-quantity">
@@ -80,7 +77,6 @@ export default function ArtistDashboard() {
                   <i onClick={()=> handleDelete(project.id)} className="far fa-trash-alt" id='can'></i>
                 </span>
               </Card.Body>
-        </a>
           </ Card>
 		)
   })

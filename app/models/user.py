@@ -12,8 +12,8 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashedPassword = db.Column(db.String(255), nullable=False)
     superUser = db.Column(db.Boolean, default=False, nullable=False)
+    avatar = db.Column(db.String, default='null', nullable=True)  # noqa
 
-    # projects = db.relationship("Project", back_populates="user")
     engineer = db.relationship("Project", backref="engineer", foreign_keys='Project.engineerId')  # noqa
     artist = db.relationship("Project", backref="artist", foreign_keys='Project.artistId')  # noqa
     comments = db.relationship("Comment", back_populates="user")
@@ -34,6 +34,7 @@ class User(db.Model, UserMixin):
             "id": self.id,
             "firstName": self.firstName,
             "lastName": self.lastName,
+            "avatar": self.avatar,
             "superUser": self.superUser
         }
 

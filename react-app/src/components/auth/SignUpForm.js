@@ -10,11 +10,12 @@ const SignUpForm = () => {
   const sessionLoaded = useSelector(state => state.session.loaded);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const [avatar, setAvatar] = useState("");
   const [superUser, setSuperUser] = useState("");
+  const [errors, setErrors] = useState([]);
 
   const onSignUp = async (e) => {
     e.preventDefault();
@@ -49,6 +50,10 @@ const SignUpForm = () => {
     setSuperUser(e.target.value);
   };
   
+  const updateAvatar = (e) => {
+    setAvatar(e.target.value);
+  };
+  
 
   if (sessionLoaded && user && user.superUser) {
     return <Redirect to={`/users/${user.id}/artists`} />;
@@ -65,7 +70,8 @@ const SignUpForm = () => {
           name="firstName"
           onChange={updateFirstName}
           value={firstName}
-        ></input>
+          placeholder='Robert'
+          ></input>
       </div>
       <div>
         <label>Last Name</label>
@@ -74,7 +80,8 @@ const SignUpForm = () => {
           name="Last Name"
           onChange={updateLastName}
           value={lastName}
-        ></input>
+          placeholder='Zimmerman'
+          ></input>
       </div>
       <div>
         <label>Email</label>
@@ -83,7 +90,8 @@ const SignUpForm = () => {
           name="email"
           onChange={updateEmail}
           value={email}
-        ></input>
+          placeholder='bobbyD@thinman.io'
+          ></input>
       </div>
       <div>
         <label>Password</label>
@@ -92,20 +100,33 @@ const SignUpForm = () => {
           name="password"
           onChange={updatePassword}
           value={password}
-        ></input>
+          placeholder='password'
+          ></input>
       </div>
       <div>
         <label>Repeat Password</label>
         <input
           type="password"
           name="repeat_password"
+          onChange={updateAvatar}
+          value={avatar}
+          required={false}
+          placeholder='password'
+          ></input>
+      </div>
+      <div>
+        <label>Avatar</label>
+        <input
+          type="text"
+          name="avatar"
           onChange={updateRepeatPassword}
           value={repeatPassword}
           required={true}
-        ></input>
+          placeholder='Image Url'
+          ></input>
       </div>
       <div>
-        <label>Engineer</label>
+        <label>Engineer?</label>
         <input
           id ="check"
           type="checkbox"

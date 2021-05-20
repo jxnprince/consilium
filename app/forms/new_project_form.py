@@ -15,5 +15,6 @@ user = current_user
 
 class ProjectForm(FlaskForm):
     name = StringField('name', validators=[DataRequired()])
+    artwork = StringField('artwork')
     engineerId = IntegerField('engineerId')  # noqa
     artistId = IntegerField('artistId')

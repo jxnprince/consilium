@@ -32,13 +32,14 @@ export default function EngineerDashboard() {
   const artistComponents = artists?.map((artist, i)=>{
     let artistId = artist?.id //find projectObj[artistId].length
     let count = 0
+    let avatar = artist.avatar? artist.avatar : artistplaceholder
     return (
       <Card key={i}>
         {!!projects.forEach((project)=>{
         if (project.artistId === artistId) count++
         })}
         <div style={{ cursor: 'pointer' }} onClick={()=> handleCardClick(artist.id)}>
-            <Card.Img src={artistplaceholder} id="card-img" />
+            <Card.Img src={avatar} id="card-img" />
               <Card.Body>
                 <Card.Title>{artist?.firstName} {artist?.lastName}</Card.Title>
                 <span id="project-quantity">
