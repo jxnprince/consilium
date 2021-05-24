@@ -18,5 +18,5 @@ class Version(db.Model):
             "url": self.url,
             "length": self.length,
             "trackId": self.trackId,
-            "comments": self.comments
+            "comments": [comm.to_dict() for comm in self.comments]
         }

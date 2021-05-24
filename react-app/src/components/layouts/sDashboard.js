@@ -15,32 +15,30 @@ export default function SongDashboard(){
   const [project, setProject] = useState([])
   const [track, setTrack] = useState([])
   const [versions, setVersions] = useState([])
-  const [currentVersion, setCurrentVersion] = useState(versions[0])
-  const [versionid, setVersionid] = useState()
+  const [currentVersion, setCurrentVersion] = useState({})
 
   async function fetchData() {
     const response = await fetch(`/api/users/${artistId}/projects/${projectId}/tracks/${trackId}`);
     const responseData = await response.json();
     setArtist(responseData?.Artist)
     setTrack(responseData?.Track)
-    setVersions(responseData?.Versions)
     setProject(responseData?.Project)
-    setCurrentVersion(responseData?.Versions[0]?.url)
+    setVersions(responseData?.Versions)
+    setCurrentVersion(responseData?.Versions[0])
   }
 
   useEffect(() => {
       fetchData();
 	}, [hideModal]);
+	
 
-  let player = <AudioPlayer url={currentVersion}/>
+  // let player = <AudioPlayer url={currentVersion.url}/>
 
   const handleVersionChange = (e) => {
-    const versionURL = e.target.value
-    // console.log(e.target.value)
-    setCurrentVersion(versionURL)
-    player = <AudioPlayer url={currentVersion}/>
+    const i = e.target.value
+    setCurrentVersion(versions[i])
   }
-
+  
   const uploaderContainer = ()=>{
   return (<UploadFile  artistId={artistId}  projectId={projectId} trackId={trackId}/>)
   }
@@ -53,12 +51,6 @@ export default function SongDashboard(){
   const goBack =()=>{
     return history.push(`/users/${artistId}/projects/${project.id}`)
   }
-
-  // const handleDelete = async (aId, pId, tId, vId) =>{
-  //   const response = await fetch(`/api/users/${aId}/projects/${pId}/tracks/${tId}/versions/${vId}/delete`, {method: 'DELETE'});
-  //   const responseData = await response?.json();
-  // fetchData()
-  // }
 
     return(
     <>
@@ -85,18 +77,20 @@ export default function SongDashboard(){
     
         <Col>
           <Row id="audio-player-container">
-            {player}
+            {<AudioPlayer url={currentVersion.url}/>}
           </Row>
 
         <Row id="version-select">
           <select onChange={handleVersionChange}>
             {versions.map((version, i) => {
-              return <option value={version.url} key={version.id}>{`Mix no. ${i + 1}`}</option>
+              return <option value={i} key={i}>{`Mix no. ${i + 1}`}</option>
             })}
           </select>
-            {/* <div>
-              <i onClick={()=> handleDelete(artist.id, project.id, track.id, version.id)} className="far fa-trash-alt"></i>
-            </div> */}
+        </Row>
+        <Row>
+        {currentVersion?.comments && currentVersion.comments.map((comment, i) =>{
+        return <p key={i}>{comment?.body}</p>
+        })}
         </Row>
         </Col>
       </Container>
