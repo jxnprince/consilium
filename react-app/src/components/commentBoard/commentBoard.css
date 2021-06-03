@@ -1,0 +1,48 @@
+#comments-container{
+  background-color: #51555E;
+  margin-top: 5vh;
+  margin-left: 15vh;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  min-height: 35vh;
+  max-height: 45vh;
+  width: 75%;
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 4vh;
+  overflow-y: scroll;
+}
+
+#comment-header{
+  position: absolute;
+  min-width: 54vw;
+  height: 6.5vh;
+  background-color: #51555E;
+}
+
+#inner-comment-container{
+  height: 100%;
+  width: 96%;
+  padding-top: 6vh;
+  overflow-y: scroll;
+}
+
+.comments{
+  background-color: #19191F;
+  padding: 1vh;
+  border-radius: 5px;
+  transition: 0.25s;
+}
+
+.comments:hover{
+  color: #E3C06D;
+  border-radius: 2.5px;
+}
+
+#no-comments{
+  background-color: #19191F;
+  color: #E3C06D;
+  padding: 1vh;
+  border-radius: 5px;
+  transition: 0.25s;
+}

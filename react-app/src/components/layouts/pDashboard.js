@@ -30,12 +30,6 @@ export default function ProjectDashboard(){
       fetchData();
 	}, []);
 	
-	// useEffect(()=>{
-	// // console.log(artist)
-	// // console.log(project)
-	// // console.log(tracks)
-	// // console.log(versions)
-	// },[tracks,project, artist])
 	
 	  const form = () => {
   return (
@@ -82,24 +76,23 @@ export default function ProjectDashboard(){
   return(
   <>
     <Container id="pdash-heading">
-      <Row>
-        <h2>{project?.name}</h2>
+      <Row >
+        <h1>{project?.name}</h1>
       </Row>
-      <Row>
-        <button onClick={goBack} className="arrow">
-          <i className="fas fa-arrow-left"></i>
-        </button>
-        <button className="plus" onClick={handleModal}>
-          <i className="fas fa-plus"></i>
-        </button>
-      </Row>
+        <Row className='plusback'>
+        <div id="arrow">
+            <i className="fas fa-arrow-left arrow" onClick={goBack}></i>
+        </div>
+        <div id="plus">
+            <i className="fas fa-plus plus" onClick={handleModal}></i>
+        </div>
+        </Row>
       <hr/>
-      <Row>
+      <Row id="subheading">
         <h2> {artist?.firstName} {artist?.lastName} </h2>
       </Row>
     </Container>
       
-    
     <Container id="pdash-main">
       <Col id="pdash-flow">
         {TracksComponent}

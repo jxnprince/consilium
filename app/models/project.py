@@ -6,6 +6,7 @@ class Project(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), unique=True, nullable=False)
+    artwork = db.Column(db.String,  default='null', nullable=True)  # noqa
     engineerId = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)  # noqa
     artistId = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
 
@@ -17,6 +18,7 @@ class Project(db.Model):
         return {
             "id": self.id,
             "name": self.name,
+            "artwork": self.artwork,
             "engineerId": self.engineerId,
             "artistId": self.artistId,
             "trackCount": len(self.tracks),

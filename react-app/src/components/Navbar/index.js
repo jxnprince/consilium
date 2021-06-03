@@ -13,20 +13,7 @@ export default function NavbarLeft() {
   const user = useSelector(state => state?.session?.user)
 	const path = user?.superUser ? `/users/${user?.id}/artists` : `/users/${user?.id}/`
 	
-	// const showLogin = () =>{
-	// 	dispatch(setCurrentModal(loginForm))
-	// 	dispatch(showModal())
-	// }
-	
-	// const showSignup = () =>{
-	// 	dispatch(setCurrentModal(SignUpForm))
-	// 	dispatch(showModal())
-	// }
-	
-	// const guestLoginHandler = () =>{
-	// 	dispatch(login('jxnP@bms.com', 'password'))
-	// }
-	
+
 	const DashButton = () =>{
 	return (
 	<a className="btn btn-primary" href={path} className="nav-buttons">

@@ -1,6 +1,6 @@
-import React, { useCallback, useRef, useState, useMemo, useEffect, Component } from "react";
-import { useCallbackRef } from 'use-callback-ref' 
-import { Container, Row, Col } from 'react-bootstrap';
+import React, { Component } from "react";
+// import { useCallbackRef } from 'use-callback-ref' 
+// import { Container, Row, Col } from 'react-bootstrap';
 import "./audioplayer.css";
 import  Country from "../Assets/country.mp3"
 import WaveSurfer from 'wavesurfer.js';
@@ -11,6 +11,7 @@ class AudioPlayer extends Component {
   constructor(props){
     super(props)
     this.props=props
+    // debugger
   }
   componentDidMount() {
     const track = document.querySelector('#track');
@@ -42,6 +43,7 @@ class AudioPlayer extends Component {
 
   render() {
     const url = this.props.url? this.props.url : Country
+    // console.log(this.props)
     return  (
       <WaveformContianer>
         <PlayButton onClick={this.handlePlay} >
