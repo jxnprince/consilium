@@ -4,6 +4,8 @@ import { useParams, useHistory } from "react-router-dom";
 import { Container, Row, Col } from 'react-bootstrap';
 import UploadFile from '../FileUpload/index'
 import AudioPlayer from '../audioPlayer/index'
+import CommentBoard from '../commentBoard/index'
+import CommentForm from '../Forms/commentForm'
 import {showModal, hideModal, setCurrentModal} from '../../store/modal'
 import './sDashboard.css'
 
@@ -54,27 +56,25 @@ export default function SongDashboard(){
 
     return(
     <>
-      <Container id="sdash-main">
         <Container id="sdash-heading">
-        <Col>
           <Row>
-            <h2>{track?.name}</h2>
+            <h1>{track?.name}</h1>
           </Row>
-          <Row>
-            <button className="arrow" onClick={goBack}>
-              <i className="fas fa-arrow-left"></i>
-            </button>
-            <button className="plus" onClick={handleUpload}>
-              <i className="fas fa-plus"></i>
-            </button>
+          <Row className='plusback'>
+            <div id="arrow">
+                <i className="fas fa-arrow-left arrow" onClick={goBack}></i>
+            </div>
+            <div id="plus">
+                <i className="fas fa-plus plus" onClick={handleUpload}></i>
+            </div>
           </Row>
-        </Col>
           <hr/>
-          <Row>
-            <h4> {project?.name} | {artist?.firstName} {artist?.lastName} </h4>
+          <Row id="subheading">
+            <h2> {project?.name} | {artist?.firstName} {artist?.lastName} </h2>
           </Row>
         </Container>
     
+      <Container id="sdash-main">
         <Col>
           <Row id="audio-player-container">
             {<AudioPlayer url={currentVersion.url}/>}
@@ -88,9 +88,8 @@ export default function SongDashboard(){
           </select>
         </Row>
         <Row>
-        {currentVersion?.comments && currentVersion.comments.map((comment, i) =>{
-        return <p key={i}>{comment?.body}</p>
-        })}
+        <CommentBoard comments={currentVersion?.comments} />
+        <CommentForm currentVersion={currentVersion?.id}/>
         </Row>
         </Col>
       </Container>

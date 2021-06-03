@@ -1,22 +1,18 @@
 #sdash-main{
-  height: 80vh;
+  height: 73vh;
   width: 75vw;
   margin-top: 19vh;
   overflow-x: hidden;
   overflow-y: scroll;
-  /* background-color: brown; */
 }
 
 #sdash-heading{
-    position: absolute;
-    top: 0;
-    padding-top: 3.5vh;
-    width: 75vw;
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
+  position: absolute;
+  top: 0;
+  padding-top: 3.5vh;
+  width: 75vw;
 }
 
-/* #version-select{
-z-index: 10000;
-} */
+#sdash-main{
+  margin-top: 27vh;
+}

@@ -64,7 +64,7 @@ export default function ArtistDashboard() {
 
   const projectComponents = projects?.map((project)=>{
     let songCount;
-      let projectArtwork = project.artwork? project.artwork : albumplaceholder
+      let projectArtwork = project?.artwork? project?.artwork : albumplaceholder
       
       return (
         <Card key={project.id}>
@@ -87,12 +87,12 @@ export default function ArtistDashboard() {
           <Row>
             <h1> {artist?.firstName} {artist?.lastName}'s Dashboard </h1>
             <Row className='plusback'>
-              <button onClick={goBack}>
-                <i className="fas fa-arrow-left"></i>
-              </button>
-              <button className="plus" onClick={handleModal}>
-                <i className="fas fa-plus"></i>
-              </button>
+            <div id="arrow">
+                <i className="fas fa-arrow-left arrow" onClick={goBack}></i>
+            </div>
+            <div id="plus">
+                <i className="fas fa-plus plus" onClick={handleModal}></i>
+            </div>
             </Row>
             <hr/>
           </Row>

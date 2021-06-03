@@ -3,7 +3,8 @@ from app.models import db, User, Project, Track, Version, Comment
 from flask_login import current_user, login_required
 from app.forms.new_project_form import ProjectForm
 from app.forms.new_track_form import TrackForm
-from app.forms.new_versionForm import VersionForm
+from app.forms.new_comment_form import CommentForm
+# from app.forms.new_versionForm import VersionForm
 from app.s3_helpers import upload_file_to_s3, allowed_file, get_unique_filename
 
 user_routes = Blueprint('users', __name__)
@@ -215,6 +216,45 @@ def uploadTrackVersion(artistId, projectId, trackId):
                         db.session.add(data)
                         db.session.commit()
                         return data.to_dict()
+                    else:
+                        return {"Errors": f"{user.firstName} {user.lastName} cannot delete '{project.name}' because they are not on the project"}  # noqa
+                else:
+                    return {"Errors": f"'{project.name}' does not belong to {artist.firstName} {artist.lastName}"}  # noqa
+            else:
+                return {"Errors": f"'{track.name}' does not belong to {project.name}"}  # noqa
+        else:
+            return {"Errors": f"Track does not exist!"}
+    else:
+        return {"Errors": f"{user.firstName} {user.lastName} is not authorized to perform this action."}  # noqa
+
+
+@user_routes.route('/<int:artistId>/projects/<int:projectId>/tracks/<int:trackId>/versions/<int:versionId>/comment', methods=['POST'])  # noqa
+@login_required
+def postVersionComment(artistId, projectId, trackId, versionId):
+    '''
+    Posts a new comment to a version
+    '''
+    user = current_user
+    artist = User.query.get(artistId)
+    project = Project.query.get(projectId)
+    track = Track.query.get(trackId)
+    version = Version.query.get(versionId)
+    if user.superUser:
+        if track:
+            if track.projectId == project.id:
+                if project.artistId == artist.id:
+                    if project.engineerId == user.id:
+                        form = CommentForm()
+                        form['csrf_token'].data = request.cookies['csrf_token']
+                        if form.validate_on_submit():
+                            data = Comment(
+                                body=form.data["body"],
+                                versionId=version.id,
+                                userId=user.id
+                            )
+                            db.session.add(data)
+                            db.session.commit()
+                            return data.to_dict()
                     else:
                         return {"Errors": f"{user.firstName} {user.lastName} cannot delete '{project.name}' because they are not on the project"}  # noqa
                 else:

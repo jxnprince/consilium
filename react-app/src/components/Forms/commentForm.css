@@ -1,0 +1,33 @@
+#comment-form{
+  background-color: #51555E;
+  margin-left: 15vh;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  max-height: 10vh;
+  width: 75%;
+  flex-direction: row;
+  padding-top: 1vh;
+  padding-left: 4vh;
+  padding-right: 0;
+  padding-bottom: 1vh;
+}
+
+#submit-btn{
+  margin-bottom: .45vh;
+  margin-left: 2vh;
+  margin-right: 2vh;
+  height: 4vh;
+  width: 4vw;
+}
+
+#form-text{
+  margin-top: 0.5vh;
+  margin-bottom: 0.5vh;
+  margin-left: 0.5vw;
+}
+
+#comment-area{
+  resize: none;
+  width: 50vw;
+  border-radius: 5px;
+}
