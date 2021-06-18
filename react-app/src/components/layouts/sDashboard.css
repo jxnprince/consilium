@@ -16,3 +16,18 @@
 #sdash-main{
   margin-top: 27vh;
 }
+
+#submit-btn{
+  overflow: hidden;
+}
+
+#comment-area{
+  outline: none;
+  background-color: #9094A2;
+  color: #19191F;
+  transition: 0.25s all ease-in-out;
+}
+
+#comment-area:focus{
+  border: 2px solid #19191F;
+}
