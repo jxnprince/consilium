@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import {useDispatch, useSelector} from 'react-redux'
 import { useHistory } from "react-router-dom";
 import { login } from '../../store/session'
-import {showModal, setCurrentModal, hideModal } from '../../store/modal'
+import { showModal, setCurrentModal, hideModal } from '../../store/modal'
 import SignUpForm from '../auth/SignUpForm'
 import './splash.css'
 
