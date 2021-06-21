@@ -22,6 +22,14 @@ export default function NavbarLeft() {
 	)
 	}
 	
+	const AboutButton = () =>{
+	return (
+	<a className="btn btn-primary" href='https://github.com/jxnprince/consilium/tree/main#readme' className="nav-buttons">
+    <img className="about-bolt" src='../Assets/aboutBolt.png'></img>
+  </a>
+	)
+	}
+	
 	
 	if (!user){
     return (
@@ -29,16 +37,18 @@ export default function NavbarLeft() {
         <Container id="main-nav">
           <SessionSwitch />
           <hr/>
+          <AboutButton />
         </Container>
       </Col>
     )
   } else if (user){
-  return(
+    return(
       <Col id="outer-nav">
         <Container id="main-nav">
           <SessionSwitch />
           <hr/>
           <DashButton />
+          <AboutButton />
         </Container>
       </Col>
   )
