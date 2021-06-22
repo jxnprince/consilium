@@ -27,6 +27,8 @@ export default function NavbarLeft() {
 	return (
 	<a className="btn btn-primary" href='https://github.com/jxnprince/consilium/tree/main#readme' className="nav-buttons">
     <img className="about-bolt" src={aboutBolt}></img>
+    <img className="about-bolt hidden" src={aboutBolt}></img>
+    {/* research .toggleClass() */}
   </a>
 	)
 	}
