@@ -6,6 +6,7 @@ import SignUpForm from '../auth/SignUpForm'
 import { login } from '../../store/session';
 import { Container, Col } from 'react-bootstrap';
 import SessionSwitch from '../auth/sessionSwitch'
+import aboutBolt from '../Assets/aboutBolt.png'
 import './navbar.css'
 
 export default function NavbarLeft() {
@@ -25,7 +26,7 @@ export default function NavbarLeft() {
 	const AboutButton = () =>{
 	return (
 	<a className="btn btn-primary" href='https://github.com/jxnprince/consilium/tree/main#readme' className="nav-buttons">
-    <img className="about-bolt" src='../Assets/aboutBolt.png'></img>
+    <img className="about-bolt" src={aboutBolt}></img>
   </a>
 	)
 	}

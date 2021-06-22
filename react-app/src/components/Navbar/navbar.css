@@ -33,6 +33,7 @@ hr {
   text-decoration: none;
   transition: background-color 0.25s;
   transition: 0.3s;
+  margin-bottom: 0.3em;
 }
 
 .nav-buttons:hover {
@@ -47,4 +48,9 @@ hr {
   color: #E3C06D;
   border: 200px;
   border-color: #19191F;
+}
+
+.about-bolt{
+  width: 3em;
+  height: 2.5em;
 }
