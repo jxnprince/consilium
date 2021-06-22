@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux'
 import {showModal, setCurrentModal} from '../../store/modal'
 import loginForm from '../auth/LoginForm'
@@ -13,7 +13,7 @@ export default function NavbarLeft() {
   const dispatch = useDispatch()
   const user = useSelector(state => state?.session?.user)
 	const path = user?.superUser ? `/users/${user?.id}/artists` : `/users/${user?.id}/`
-	
+	const [bolt, setBolt] = useState(aboutBolt);
 
 	const DashButton = () =>{
 	return (
@@ -26,8 +26,12 @@ export default function NavbarLeft() {
 	const AboutButton = () =>{
 	return (
 	<a className="btn btn-primary" href='https://github.com/jxnprince/consilium/tree/main#readme' className="nav-buttons">
-    <img className="about-bolt" src={aboutBolt}></img>
-    <img className="about-bolt hidden" src={aboutBolt}></img>
+    <img 
+      className="about-bolt" 
+      src={aboutBolt}
+      onMouseEnter={() => setBolt(aboutBolt)} 
+      onMouseLeave={() => setBolt(aboutBolt)}
+      ></img>
     {/* research .toggleClass() */}
   </a>
 	)
