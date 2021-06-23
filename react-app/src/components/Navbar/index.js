@@ -7,6 +7,7 @@ import { login } from '../../store/session';
 import { Container, Col } from 'react-bootstrap';
 import SessionSwitch from '../auth/sessionSwitch'
 import aboutBolt from '../Assets/aboutBolt.png'
+import aboutBoltGrey from '../Assets/aboutBoltGrey.png'
 import './navbar.css'
 
 export default function NavbarLeft() {
@@ -28,8 +29,8 @@ export default function NavbarLeft() {
 	<a className="btn btn-primary" href='https://github.com/jxnprince/consilium/tree/main#readme' className="nav-buttons">
     <img 
       className="about-bolt" 
-      src={aboutBolt}
-      onMouseEnter={() => setBolt(aboutBolt)} 
+      src={bolt}
+      onMouseEnter={() => setBolt(aboutBoltGrey)} 
       onMouseLeave={() => setBolt(aboutBolt)}
       ></img>
     {/* research .toggleClass() */}
