@@ -18,8 +18,8 @@
     width: 35vh;
     display: flex;
     align-items: center;
+    padding: 10px;
     justify-content: center;
     border-radius: 25px;
-    padding: 10px;
     box-shadow: 2.5px 5px rgba(81, 85, 94, 0.3);
 }
