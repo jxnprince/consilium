@@ -37,20 +37,20 @@ hr {
 }
 
 .nav-buttons:hover {
-  background-color: #19191F;
   color: #51555E;
+  background-color: #19191F;
   transition: background-color 0.25s;
   transition: 0.3s;
 }
 
 .nav-buttons:active {
-  background-color: #51555E;
   color: #E3C06D;
-  border: 200px;
+  background-color: #51555E;
   border-color: #19191F;
+  border: 200px;
 }
 
 .about-bolt{
-  width: 3em;
   height: 2.5em;
+  width: 3em;
 }
