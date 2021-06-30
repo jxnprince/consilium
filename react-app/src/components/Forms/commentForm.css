@@ -1,8 +1,8 @@
 #comment-form{
   background-color: #51555E;
   margin-left: 15vh;
-  border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
   max-height: 10vh;
   flex-direction: row;
   width: 75%;
@@ -14,8 +14,8 @@
 
 #submit-btn{
   margin-bottom: .45vh;
-  margin-left: 2vh;
   margin-right: 2vh;
+  margin-left: 2vh;
   width: 4vw;
   height: 4vh;
 }

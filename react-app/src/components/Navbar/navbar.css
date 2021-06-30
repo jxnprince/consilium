@@ -37,16 +37,16 @@ hr {
 }
 
 .nav-buttons:hover {
-  color: #51555E;
   background-color: #19191F;
+  color: #51555E;
   transition: background-color 0.25s;
   transition: 0.3s;
 }
 
 .nav-buttons:active {
   color: #E3C06D;
-  background-color: #51555E;
   border-color: #19191F;
+  background-color: #51555E;
   border: 200px;
 }
 

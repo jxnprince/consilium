@@ -2,9 +2,9 @@
     position: absolute;
     background-color: rgba(144, 148, 162, 0.33);
     top: 0;
-    bottom: 0;
     left: 0;
     right: 0;
+    bottom: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -13,8 +13,8 @@
 .modal-content {
     background-color: #51555E;
     color: #F5F5F1;
-    max-height: 50vh;
     min-height: 15vh;
+    max-height: 50vh;
     width: 35vh;
     display: flex;
     align-items: center;
