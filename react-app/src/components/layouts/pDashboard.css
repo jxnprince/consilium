@@ -1,7 +1,7 @@
 #pdash-main{
   height: 75vh;
-  width: 75vw;
   margin-top: 21vh;
+  width: 75vw;
   overflow-x: hidden;
   overflow-y: scroll;
 }
@@ -15,8 +15,8 @@
 }
 
 .track-rows{
-  width: 75%;
   height: 10%;
+  width: 75%;
   margin: 1vh;
   border-radius: 10px;
   background-color: #51555E;
@@ -48,8 +48,8 @@ margin-right: 5%;
 }
 
 #subheading{
-    display: flex;
-    flex-flow: column nowrap;
+  flex-flow: column nowrap;
+  display: flex;
     align-items: center;
     background-color: #19191F;
     box-shadow: 0 0 18px 12px #19191F;

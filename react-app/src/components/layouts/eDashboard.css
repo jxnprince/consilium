@@ -9,8 +9,8 @@
 #edash-flow{
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
   padding-top: 5vw;
+  justify-content: space-evenly;
 }
 
 #edash-flow > div {
@@ -19,9 +19,9 @@
 }
 
 #edash-heading{
-    position: absolute;
-    top: 0;
-    padding-top: 3.5vh;
+  top: 0;
+  padding-top: 3.5vh;
+  position: absolute;
     width: 75vw;
 }
 
@@ -33,10 +33,10 @@
   max-width: 20vw;
   background-color: #51555E;
   border: 2px solid rgba(144, 148, 162, 0.1);
-  border-top-left-radius: 25px;
   border-top-right-radius: 25px;
-  transition: 0.25s;
+  border-top-left-radius: 25px;
   flex-basis: 0;
+  transition: 0.25s;
 }
 
 .card:hover{
